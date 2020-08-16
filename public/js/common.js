@@ -3,10 +3,15 @@
 let block_0 = $("#block_0");
 let block_1 = $("#block_1");
 let block_2 = $("#block_2");
+<<<<<<< HEAD
 let block_3 = $("#block_3");
 let block_4 = $("#block_4");
 
 var MAX_NUM = 5;
+=======
+
+var MAX_NUM = 3;
+>>>>>>> origin/master
 var blocks = [];
 
 for (i = 0; i < MAX_NUM; i++) {
@@ -19,20 +24,34 @@ function block_up(up){
       blocks[up].prev().before(blocks[up]);
     }; 
 }
+<<<<<<< HEAD
 for ( var i = 0; i < MAX_NUM; i ++ ){
   var u = block_up(i);
   $('#block'+i+'_up').click(u);
+=======
+for ( var i = 0; i < 3; i ++ ){
+var u = block_up(i);
+$('#block'+i+'_up').click(u);
+>>>>>>> origin/master
 }
  
 // down ボタンのクリックイベント
  function block_down(down){
      return function(){
        blocks[down].next().after(blocks[down]);
+<<<<<<< HEAD
      };
  }
  for ( var i = 0; i < MAX_NUM; i ++ ){
   var d = block_down(i);
   $('#block'+i+'_down').click(d);
+=======
+     }; 
+ }
+ for ( var i = 0; i < 3; i ++ ){
+ var d = block_down(i);
+ $('#block'+i+'_down').click(d);
+>>>>>>> origin/master
  }
 
 // フォームの送信　（create.php）
@@ -42,9 +61,13 @@ $("#recipe_submit").on("click", function(){
         // 先に実行したい処理をここ
         $("#sort_0").val(block_0.index()),
         $("#sort_1").val(block_1.index()),
+<<<<<<< HEAD
         $("#sort_2").val(block_2.index()),
         $("#sort_3").val(block_3.index()),
         $("#sort_4").val(block_4.index())
+=======
+        $("#sort_2").val(block_2.index())
+>>>>>>> origin/master
 
     ).done(function(){ 
     
@@ -53,6 +76,7 @@ $("#recipe_submit").on("click", function(){
     });
 });
 
+<<<<<<< HEAD
 // 画像プレビューの表示 create.blade.php / recipeedit.blade.php
 
 $('#hd_img').on('change', function (e) {
@@ -100,3 +124,32 @@ $("#delete").on("click", function(){
       return false;
     }
 });
+=======
+
+// 検索機能 find.blade.php -> result.blade.php
+
+　//URLのパラメーターを取得
+let v = new URLSearchParams(window.location.search);
+　//URLのパラメーターのうち検索されたキーワードを取得
+  v = v.get('search-key');
+　//検索したい全てのURLを配列に格納
+  const urlLists = [
+    "/list/"];
+    
+  $.each(urlLists, function(i){
+    $.ajax({
+      url　: urlLists[i],
+      dataType : 'html',
+      success　: function(data){
+　　　   //上記のURLからキーワードを探す
+        if( $(data).find("#article").text().indexOf(v) !== -1){
+　　　　　　//あれば、ページを表示する
+          $('<li><a href="' + urlLists[i] + '">' +$(data).find("h1").text() + '</a></li>').appendTo('ul');
+          }
+        },
+        error: function(data){
+          console.log("error")
+        }
+      });
+    });
+>>>>>>> origin/master

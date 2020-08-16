@@ -25,6 +25,7 @@
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
     
 </head>
+<<<<<<< HEAD
 
 <body>
     <div id="app">
@@ -37,12 +38,26 @@
             <a href="{{ url('/login') }}"><i class="fas fa-user-cog"></i></a>
             @endguest
         </header>
+=======
+<body>
+    <div id="app">
+    <header>
+    <a href="{{ url('/') }}"><img src="{{asset('img/logo_big.png')}}" alt=""></a>
+        @auth
+        <a href="{{ url('/userpage/'.Auth::user()->id) }}"><i class="fas fa-user-cog"></i></a>
+        @endauth
+        @guest
+        <a href="{{ url('/login') }}"><i class="fas fa-user-cog"></i></a>
+        @endguest
+    </header>
+>>>>>>> origin/master
 
         <main>
             @yield('content')
         </main>
 
         <ul class="menu_fixed">
+<<<<<<< HEAD
                 <a href="{{ url('/') }}"><li><i class="fas fa-search"></i><span>検索する</span></li></a>
                 <a href="{{ url('/list') }}"><li><i class="fas fa-stream"></i><span>新着レシピ</span></li></a>
                 <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
@@ -51,4 +66,15 @@
     </div>
 </body>
 
+=======
+                <a href="{{ url('/') }}"><li><i class="fas fa-search"></i><span>探す</span></li></a>
+                <a href="{{ url('/list') }}"><li><i class="fas fa-stream"></i><span>新着</span></li></a>
+                <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿</span></li></a>
+                <a href="{{ url('/saved') }}"><li><i class="far fa-bookmark"></i><span>保存</span></li></a>
+        </ul>
+    </div>
+
+
+</body>
+>>>>>>> origin/master
 </html>

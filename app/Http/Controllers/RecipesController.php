@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+<<<<<<< HEAD
 use \InterventionImage;
+=======
+>>>>>>> origin/master
 
 use App\Recipe;
 use App\Process;
@@ -15,7 +18,10 @@ use Validator;
 
 class RecipesController extends Controller
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     public function list(){
         $recipes = Recipe::join('users', 'recipes.user_id', '=', 'users.id')
         ->orderBy('recipes.created_at', 'desc')
@@ -24,7 +30,10 @@ class RecipesController extends Controller
         return view('list',compact('recipes'));
     }
 
+<<<<<<< HEAD
     
+=======
+>>>>>>> origin/master
     public function store(Request $request){
         //バリデーション
         $validator = Validator::make($request->all(), [
@@ -43,6 +52,7 @@ class RecipesController extends Controller
         $recipes->user_id = $request->user_id;
         if(!$request->file('hd_img')==NULL){
             Storage::delete('public/img/'.$request->hd_img);
+<<<<<<< HEAD
             $file = $request->file('hd_img');
             // 画像のリサイズ
             InterventionImage::make($file)->resize(1080, null, function ($constraint) {$constraint->aspectRatio();})->save();
@@ -50,21 +60,34 @@ class RecipesController extends Controller
             $recipes->hd_img = basename($path);
         }
 
+=======
+            $path = $request->file('hd_img')->store('public/img');
+            $recipes->hd_img = basename($path);
+        }
+>>>>>>> origin/master
         $recipes->save();
 
         $recipe_id = $recipes->id;
 
+<<<<<<< HEAD
         for ($i = 0; $i < 5; $i++){
+=======
+        for ($i = 0; $i < 3; $i++){
+>>>>>>> origin/master
             ${"processes".$i} = new Process();
             ${"processes".$i}->text = $request->{"text_".$i};
             ${"processes".$i}->recipe_id = $recipe_id;
             ${"processes".$i}->sort = $request->{"sort_".$i};
             if(!$request->file("image_".$i)==NULL){
                 Storage::delete('public/img/'.$request->{"image_".$i});
+<<<<<<< HEAD
                 $file = $request->file("image_".$i);
                 // 画像のリサイズ
                 InterventionImage::make($file)->resize(1080, null, function ($constraint) {$constraint->aspectRatio();})->save();
                 $path = $file->store('public/img');
+=======
+                $path = $request->file("image_".$i)->store('public/img');
+>>>>>>> origin/master
                 ${"processes".$i}->image = basename($path);
             }
             ${"processes".$i}->save();
@@ -84,7 +107,10 @@ class RecipesController extends Controller
         return view('saved');
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     public function find(){
         $recipes = Recipe::join('users', 'recipes.user_id', '=', 'users.id')
         ->orderBy('recipes.created_at', 'desc')
@@ -93,17 +119,26 @@ class RecipesController extends Controller
         return view('find', compact('recipes'));
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     public function create(){
         return view('create');
     }
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     public function result(){
         return view('result');
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     public function detail(Recipe $recipe){
         $processes = Recipe::join('processes', 'recipes.id', '=', 'processes.recipe_id')
         ->where('processes.recipe_id', $recipe->id)
@@ -113,7 +148,10 @@ class RecipesController extends Controller
         return view('detail', compact('recipe' , 'processes', 'ingredients'));
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     public function recipeedit(Recipe $recipe){
         $processes = Recipe::join('processes', 'recipes.id', '=', 'processes.recipe_id')
         ->where('processes.recipe_id', $recipe->id)
@@ -122,7 +160,10 @@ class RecipesController extends Controller
         return view('recipeedit', compact('recipe', 'processes', 'ingredients'));
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     public function update(Request $request){
         $recipes = Recipe::find($request->recipe_id);
         if(!$recipes->title==NULL){
@@ -130,10 +171,14 @@ class RecipesController extends Controller
         }
         if(!$request->file('hd_img')==NULL){
             Storage::delete('public/img/'.$request->hd_img);
+<<<<<<< HEAD
             $file = $request->file('hd_img');
             // 画像のリサイズ
             InterventionImage::make($file)->resize(1080, null, function ($constraint) {$constraint->aspectRatio();})->save();
             $path = $file->store('public/img');
+=======
+            $path = $request->file('hd_img')->store('public/img');
+>>>>>>> origin/master
             $recipes->hd_img = basename($path);
         }
         $recipes->save();
@@ -142,15 +187,23 @@ class RecipesController extends Controller
 
         $processes = Process::where('recipe_id',$recipe_id)->get();
 
+<<<<<<< HEAD
         for ($i = 0; $i < 5; $i++){
+=======
+        for ($i = 0; $i < 3; $i++){
+>>>>>>> origin/master
             $processes[$i]->text = $request->{"text_".$i};
             $processes[$i]->sort = $request->{"sort_".$i};
             if(!$request->file("image_".$i)==NULL){
                 Storage::delete('public/img/'.$request->{"image_".$i});
+<<<<<<< HEAD
                 $file = $request->file("image_".$i);
                 // 画像のリサイズ
                 InterventionImage::make($file)->resize(1080, null, function ($constraint) {$constraint->aspectRatio();})->save();
                 $path = $file->store('public/img');
+=======
+                $path = $request->file("image_".$i)->store('public/img');
+>>>>>>> origin/master
                 $processes[$i]->image = basename($path);
             }
             $processes[$i]->save();
@@ -165,6 +218,7 @@ class RecipesController extends Controller
         return redirect('recipe/'.$request->recipe_id);        
     }
 
+<<<<<<< HEAD
 
     public function destroy(Recipe $recipe){
         $ingredient = Ingredient::where('recipe_id',$recipe->id)->delete();
@@ -172,11 +226,17 @@ class RecipesController extends Controller
         foreach ($processes as $process){
             $process->delete();
         }
+=======
+    public function destroy(Recipe $recipe){
+>>>>>>> origin/master
         $recipe->delete();
         return redirect('userpage/'.$recipe->user_id);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     public function index(Request $request){
     #キーワード受け取り
     $keyword = $request->input('keyword');

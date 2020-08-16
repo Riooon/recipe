@@ -9,14 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 use App\User;
 use App\Recipe;
+<<<<<<< HEAD
 use App\Process;
 use App\Ingredient;
+=======
+>>>>>>> origin/master
 use Validator;
 
 class UsersController extends Controller
 {
     //
      public function destroy(User $user){
+<<<<<<< HEAD
         $recipes = Recipe::where('user_id',$user->id)->get();
         foreach ($recipes as $recipe){
             $ingredient = Ingredient::where('recipe_id',$recipe->id)->delete();
@@ -28,6 +32,10 @@ class UsersController extends Controller
         }
         $user->delete();
         return redirect('/');
+=======
+        $user->delete();       //追加
+        return redirect('/');  //追加
+>>>>>>> origin/master
     }
 
     public function userpage(User $user){

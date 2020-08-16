@@ -17,8 +17,12 @@
         
         <h4 class="cooking_procedure">タイトル写真</h4>
         <div class="form_inner">
+<<<<<<< HEAD
             <img id="preview">
             <h3><input type="file" name="hd_img" id="hd_img"></h3>
+=======
+            <h3><input type="file" name="hd_img"></h3>
+>>>>>>> origin/master
         </div>
 
         <h4 class="cooking_procedure">お買い物リスト</h4>
@@ -32,6 +36,7 @@
         <div class="form_inner">
             <div class="recipe_blocks">
 
+<<<<<<< HEAD
             @for ($i = 0; $i < 5; $i++)
 
                 <div class="recipe_block" id="block_{{ $i }}">
@@ -39,6 +44,14 @@
                         <img id="preview_{{ $i }}" class="previews">
                         <input type="file" name="image_{{ $i }}" id="image_{{ $i }}">
                         <h3 class="text"><textarea name="text_{{ $i }}" id="" placeholder="手順{{$i+1}}">{{ $processes[$i]->text }}</textarea></h3>                        
+=======
+            @for ($i = 0; $i < 3; $i++)
+
+                <div class="recipe_block" id="block_{{ $i }}">
+                    <div class="desc">
+                        <input type="file" name="image_{{ $i }}">
+                        <h3 class="text"><textarea name="text_{{ $i }}" id="">{{ $processes[$i]->text }}</textarea></h3>                        
+>>>>>>> origin/master
                     </div>
                     <div class="updown">
                         <i class="fas fa-arrow-circle-up" id="block{{ $i }}_up"></i>
@@ -60,7 +73,11 @@
     <form action="{{ url('recipe/'.$recipe->id) }}" method="POST">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
+<<<<<<< HEAD
         <button class="btn btn-danger" id="delete" type="submit">レシピを削除する</button>
+=======
+        <button type="submit" class="btn btn-danger">レシピを削除する</button>
+>>>>>>> origin/master
     </form>
     </div>
     

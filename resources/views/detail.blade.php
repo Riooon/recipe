@@ -23,7 +23,10 @@
     @if (count($processes) > 0)
         @foreach ($processes as $process)
         
+<<<<<<< HEAD
         @if(!$process->image==NULL || !$process->text==NULL)
+=======
+>>>>>>> origin/master
             <div class="recipe_prosess">
                 @if(!$process->image==NULL)
                 <img src="{{ asset('storage/img/'.$process->image), true }}" alt onerror="this.onerror">
@@ -32,7 +35,10 @@
                 <p>{{$process->text}}</p>
                 @endif
             </div>
+<<<<<<< HEAD
         @endif
+=======
+>>>>>>> origin/master
 
         @endforeach
     @endif

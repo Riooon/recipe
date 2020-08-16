@@ -1,9 +1,12 @@
 /* 共通CSS ーーーーーーーーーーーーーーーーー */
+<<<<<<< HEAD
 body {
     max-width: 720px;
     margin: 0 auto;
 }
 
+=======
+>>>>>>> origin/master
 .bold {font-weight: bold;}
 .gray {color: gray;}
 .tomato {color: tomato;}
@@ -90,7 +93,11 @@ header {
     display: flex;
     justify-content: center;
     position: relative;
+<<<<<<< HEAD
     padding: 18px 20px 18px 0;
+=======
+    padding: 18px 0;
+>>>>>>> origin/master
     font-size: 18px;
     border-bottom: 1px solid #80808033;
 }
@@ -111,7 +118,10 @@ header img {
 
 /* 固定のメニューバー ーーーーーーーーーーーーーーーー  */
 .menu_fixed {
+<<<<<<< HEAD
     max-width: 720px;
+=======
+>>>>>>> origin/master
     position: fixed;
     bottom: 0;
     display: flex;
@@ -260,7 +270,11 @@ main {
 }
 .account_info img {
     width: 100px;
+<<<<<<< HEAD
     height: 95px;
+=======
+    height: 100px;
+>>>>>>> origin/master
     object-fit: cover;
     border-radius: 50%;
 }
@@ -367,12 +381,15 @@ main {
     width: 100%;
     line-height: 30px;
 }
+<<<<<<< HEAD
 #preview {
     width: 100%;
     max-height: 200px;
     object-fit: cover;
     border-radius: 3px;
 }
+=======
+>>>>>>> origin/master
 #hd_img {
     padding: 10px 0;
 }
@@ -419,12 +436,15 @@ input#file-upload-button {
 .recipe_block .desc {
     flex: 1;
 }
+<<<<<<< HEAD
 .recipe_block .desc .previews {
     width: 100%;
     max-height: 200px;
     object-fit: cover;
     border-radius: 3px;
 }
+=======
+>>>>>>> origin/master
 .recipe_block .desc textarea {
     border: none;
     border-bottom: 1px solid #80808033;

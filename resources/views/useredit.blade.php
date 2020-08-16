@@ -9,8 +9,12 @@
     {{ csrf_field() }}
     <dl>
         <dt>アイコン画像</dt>
+<<<<<<< HEAD
         <dt><img id="preview"></dt>
         <dd><input type="file" name="icon" class="input_text" id="icon"></dd>
+=======
+        <dd><input type="file" name="icon" class="input_text"></dd>
+>>>>>>> origin/master
         <dt>ユーザー名</dt>
         <dd><input type="text" name="name" class="input_text" value="{{ $user->name }}"></dd>
         <dt>メールアドレス</dt>
@@ -31,7 +35,11 @@
     <form action="{{ url('user/'.Auth::user()->id) }}" method="POST">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
+<<<<<<< HEAD
         <button type="submit" id="delete" class="btn btn-danger">アカウント削除</button>
+=======
+        <button type="submit" class="btn btn-danger">アカウント削除</button>
+>>>>>>> origin/master
     </form>
 </div>
 

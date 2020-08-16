@@ -14,10 +14,16 @@
                 <h3 class="title"><input type="text" name="title"></h3>
             </div>
 
+<<<<<<< HEAD
             <h4 class="cooking_procedure">タイトル写真</h4>
             <div class="form_inner">
                 <img id="preview">
                 <h3 class="title"><input id="hd_img" type="file" name="hd_img"></h3>                
+=======
+            <h4 class="cooking_procedure">ヘッダー画像</h4>
+            <div class="form_inner">
+                <h3 class="title"><input id="hd_img" type="file" name="hd_img"></h3>
+>>>>>>> origin/master
             </div>
 
             <h4 class="cooking_procedure">お買い物リスト</h4>
@@ -32,6 +38,7 @@
             <div class="form_inner">
                 <div class="recipe_blocks">
 
+<<<<<<< HEAD
                 @for ($i = 0; $i < 5; $i++)
 
                     <div class="recipe_block" id="block_{{ $i }}">
@@ -39,6 +46,14 @@
                             <img id="preview_{{ $i }}" class="previews">
                             <input type="file" name="image_{{ $i }}" id="image_{{ $i }}">
                             <h3 class="text"><textarea name="text_{{ $i }}" id="" placeholder="手順{{$i+1}}"></textarea></h3>
+=======
+                @for ($i = 0; $i < 3; $i++)
+
+                    <div class="recipe_block" id="block_{{ $i }}">
+                        <div class="desc">
+                            <input type="file" name="image_{{ $i }}" id="image_{{ $i }}">
+                            <h3 class="text"><textarea name="text_{{ $i }}" id="">block_{{ $i }}</textarea></h3>
+>>>>>>> origin/master
                         </div>
                         <div class="updown">
                             <i class="fas fa-arrow-circle-up" id="block{{ $i }}_up"></i>
@@ -53,7 +68,10 @@
                 
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <button type="button" id="recipe_submit">送信</button>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
             </div>
         </form>
 
