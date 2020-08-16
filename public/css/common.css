@@ -1,0 +1,491 @@
+/* 共通CSS ーーーーーーーーーーーーーーーーー */
+body {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.bold {font-weight: bold;}
+.gray {color: gray;}
+.tomato {color: tomato;}
+
+.pagenation {
+    padding: 10px 0 30px;
+    text-align: center;
+}
+
+.pagenation ul{
+    display: flex;
+    justify-content: center;
+}
+.pagenation li {
+    color: gray;
+    margin: 0 10px 0;
+    font-size: 17px;
+    font-weight: bold;
+}
+.pagenation li a{
+    color: #c8bd00;
+}
+
+/* バリデーション common/erros.blade.php */
+.validation_error .errors{
+    text-align: left;
+    font-size: 13px;
+    color: gray;
+    line-height: 20px;
+    margin: 0 auto;
+    display: inline-block;
+    padding: 20px 0 0;
+}
+.validation_error .message {
+    padding: 20px 0;
+    color: tomato;
+}
+
+/* 認証画面 ーーーーーーーーーーーーーーーー  */
+.auth_area {
+    padding: 30px;
+    text-align: center;
+}
+.auth_title h1 {
+    font-weight: bold;
+    font-size: 20px;
+    color: #c8bd00;
+}
+.auth_inputs {
+    margin: 20px 0 0;
+}
+.auth_inputs li {
+    margin: 0 0 20px;
+}
+
+.auth_inputs li .input_text {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+.auth_inputs li button {
+    width: 100%;
+    padding: 15px 10px;
+    border-radius: 30px;
+    border: none;
+    background: #c8bd00;
+    color: white;
+}
+.auth_min_text {
+    font-size: 13px;
+    color: gray;
+}
+.auth_logo img {
+    width: 100px;
+    object-fit: cover;
+    margin: 0 0 20px;
+}
+
+/* ヘッダー */
+header {
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 18px 20px 18px 0;
+    font-size: 18px;
+    border-bottom: 1px solid #80808033;
+}
+header h2 {
+    display: inline-block;
+    font-weight: bold;
+}
+header a i {
+    position: absolute;
+    right: 0;
+    font-size: 25px;
+    margin: 4px 15px 0 0;
+    color: #c8bd00;;
+}
+header img {
+    width: 200px;
+}
+
+/* 固定のメニューバー ーーーーーーーーーーーーーーーー  */
+.menu_fixed {
+    max-width: 720px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    margin-bottom: 0;
+    padding: 12px 0;
+    font-size: 15px;
+    border-top: 1px solid #80808033;
+}
+.menu_fixed li {
+    display: flex;
+    flex-direction: column;
+}
+.menu_fixed li i {
+    margin: 0 0 .5rem;
+}
+.menu_fixed span {
+    font-size: 15px;
+}
+
+/* メイン */
+main {
+    padding: 0 0 63px;
+}
+
+/* find.blade.php 検索ページ ーーーーーーーーーーーーーーーー  */
+.main_image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    background-image: url("../img/main_image.jpg");
+    background-position: 0 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.main_image h1 {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 0 30px;
+    color: black;
+}
+.serch_bar .keyword {
+    height: 35px;
+    width: 200px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: none;
+}
+.serch_bar .btn {
+    height: 37px;;
+    width: 50px;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: #c8bd00;
+    color: white;
+}
+.find_by_recipe h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+.find_by_recipe .title {
+    border-bottom: 1px solid black;
+    padding: 0 0 10px;
+}
+.find_by_recipe ul {
+    margin: 20px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: space-evenly;
+}
+.find_by_recipe input {
+    border: none;
+    width: 145px;
+    height: 100px;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    background-position: 0 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0 0 20px;
+}
+.find_by_recipe ul input:nth-child(odd) {
+    margin: 0 0 20px;
+}
+.find_by_recipe .pasta {
+    background-image: url('../img/pasta.jpg');
+}
+.find_by_recipe .don {
+    background-image: url('../img/don.jpg');
+}
+.find_by_recipe .curry {
+    background-image: url('../img/curry.jpg');
+}
+.find_by_recipe .salada {
+    background-image: url('../img/salada.jpg');
+}
+
+.category_bar {
+    background: #c8bd00;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* list.blade.php レシピ一覧ページ ーーーーーーーーーーーーーーーー  */
+.recipe_card {
+    display: flex;
+    padding: 15px 10px 15px;
+    border-top: 1px solid #80808033;
+}
+.recipe_card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.recipe_titles {
+    margin: 20px;
+}
+.recipe_card h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 20px;
+    line-height: 20px;
+}
+
+/* mypage.blade.php マイページ ーーーーーーーーーーーーーーーー  */
+.account_info {
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+.account_info img {
+    width: 100px;
+    height: 95px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.account_info h4 {
+    font-weight: bold;
+    font-size: 20px;
+}
+.account_info .edit_btn {
+    margin: 10px 0 0;
+    color: white;
+    background: #c8bd00;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.thanks_for_posts {
+    font-size: 13px;
+}
+.recipe_card .edit_btn {
+    margin: 10px 0 0;
+    color: white;
+    background: #c8bd00;
+    border-radius: 10px;
+    padding: 8px 15px;
+    font-size: 10px;
+    font-weight: bold;
+}
+.user_inputs {
+    margin: 40px 0 0;
+}
+.user_inputs dl {
+    width: 75%;
+    margin: 0 auto;
+}
+.user_inputs dd .input_text {
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #80808033;
+    font-size: 15px;
+}
+.user_inputs dd {
+    padding: 0 0 20px;
+}
+.user_inputs dt {
+    font-size: 13px;
+    color: gray;
+    margin: 0 0 10px;
+}
+.user_inputs .submit {
+    width: 80%;
+    padding: 12px 10px;
+    margin: 0 10%;
+    border-radius: 30px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    background: #c8bd00;
+    color: white;
+}
+.wdithdraws {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+}
+.wdithdraws .btn {
+    text-decoration: underline;
+}
+.wdithdraws button {
+    border: none;
+    background: none;
+    text-decoration: underline;
+    color: tomato;
+    margin: 0 0 0 10px;
+}
+
+
+/* create.php レシピ作成画面 ーーーーーーーーーーーーーーーー  */
+.form_layout {
+    text-align: center;
+}
+.form_inner {
+    margin: 20px 0;
+    padding: 0 12.5%;
+    text-align: center;
+}
+.recipe_form {
+    width: 100%;
+}
+.cooking_procedure {
+    background: #c8bd00;;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+}
+.recipe_form .title input {
+    border: none;
+    border-bottom: 1px solid #80808033;
+    box-sizing: border-box;
+    width: 100%;
+    line-height: 30px;
+}
+#preview {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+#hd_img {
+    padding: 10px 0;
+}
+
+input#file-upload-button {
+    color: blue;
+}
+.recipe_form .ingredients {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #80808033;
+    margin: 0 0 10px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+}
+.recipe_form .text textarea{
+    box-sizing: border-box;
+    width: 100%;
+    height: 90px;
+    resize: none;
+}
+.btn_around {
+    text-align: center;
+    margin: 20px 0 0;
+}
+.recipe_block {
+    display: flex;
+    margin: 25px 0 0;
+}
+.recipe_block .text {
+    margin: 15px 0 0;
+}
+.recipe_block .updown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 25px
+}
+.recipe_block .updown i {
+    padding: 10px;
+    color: #c8bd00;
+}
+.recipe_block .desc {
+    flex: 1;
+}
+.recipe_block .desc .previews {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+.recipe_block .desc textarea {
+    border: none;
+    border-bottom: 1px solid #80808033;
+    height: 50px;
+}
+.form_inner #recipe_submit {
+    border: none;
+    margin: 30px 0;
+    color: white;
+    background: #c8bd00;
+    border-radius: 30px;
+    padding: 15px 100px;
+    font-size: 15px;
+    font-weight: bold;
+}
+/* detail.blade.php レシピ詳細を表示する画面 ーーーーーーーーーーーーーーーー  */
+.recipe_heaader {
+    text-align: center;
+}
+.recipe_heaader img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.recipe_heaader h1 {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+}
+.recipe_prosess{
+    padding: 30px;
+    border-top: 1px solid#80808033;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe_prosess img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    margin: 0 0 30px;
+}
+.shopping_list li{
+    padding: 12px;
+    border-bottom: 1px solid#80808033;
+}
+
+/* saved.blade.php 保存した投稿のページ ーーーーーーーーーーーーーーーー */
+.coming_soon {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.coming_soon img {
+    width: 180px;
+    object-fit: cover;
+}
+.coming_soon h1 {
+    margin: 20px 0 0;
+    font-weight: bold;
+    font-size: 20px;
+}
