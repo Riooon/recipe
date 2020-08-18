@@ -23,6 +23,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
+
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="「お金なし・スキルなし・食材なし」の海外留学生でも簡単に作れる料理を紹介する、レシピのシェアサイトです。他のレシピサイトを参考にしても、料理工程が難しすぎたり、そもそも食材が打ってなかったり。そんなとき参考にしてもらえると嬉しいです。">
+    <meta property="og:title" content="Okome Mode">
+    <meta property="og:url" content="https://okomemode.com">
+    <meta property="og:image" content="http://okomemode.com/img/main_image.jpg">
+    <meta property="og:site_title" content="Okome Mode">
     
 </head>
 
