@@ -16,13 +16,13 @@ class CreateIngredientsTable extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
             $table->integer('recipe_id');
-            $table->string('ingredient_1');
-            $table->string('ingredient_2');
-            $table->string('ingredient_3');
-            $table->string('ingredient_4');
-            $table->string('ingredient_5');
-            $table->string('ingredient_6');
-            $table->string('ingredient_7');
+            $table->string('ingredient_0');
+            $table->string('ingredient_1')->nullable();
+            $table->string('ingredient_2')->nullable();
+            $table->string('ingredient_3')->nullable();
+            $table->string('ingredient_4')->nullable();
+            $table->string('ingredient_5')->nullable();
+            $table->string('ingredient_6')->nullable();
             $table->timestamps();
         });
     }

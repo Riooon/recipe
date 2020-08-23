@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenamePostsToRecipesTable extends Migration
+class CreateRecipesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class RenamePostsToRecipesTable extends Migration
      */
     public function up()
     {
-        Schema::table('recipes', function (Blueprint $table) {
-            //
-            Schema::rename('posts', 'recipes');
+        Schema::create('recipes', function (Blueprint $table) {
+            $table->id();
+            $table->string('hd_img');
+            $table->string('title');
+            $table->integer('user_id');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +29,6 @@ class RenamePostsToRecipesTable extends Migration
      */
     public function down()
     {
-        Schema::table('recipes', function (Blueprint $table) {
-            //
-            Schema::rename('recipes', 'posts');
-        });
+        Schema::dropIfExists('recipes');
     }
 }
