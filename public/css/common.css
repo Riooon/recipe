@@ -1,7 +1,103 @@
-/* 共通CSS ーーーーーーーーーーーーーーーーー */
+/* 共通CSS ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
 body {
     max-width: 720px;
     margin: 0 auto;
+}
+
+@media(min-width:720px){
+    body {
+        border: 1px solid #80808033;
+    }
+}
+
+
+progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+}
+::-webkit-progress-value {
+    background-color: #c8bd00;
+    border-radius: 8px;
+  }
+::-webkit-progress-bar {
+  background-color: #80808033;
+  border-radius: 8px;
+  height: 13px;
+  width: 150px;
+  margin: 10px 0 0;
+}
+::-moz-progress-value {
+    background-color: #c8bd00;
+    border-radius: 8px;
+}
+::-moz-progress-bar {
+    background-color: #80808033;
+    border-radius: 8px;
+    height: 13px;
+    width: 150px;
+    margin: 10px 0 0;
+}
+
+
+
+/* ヘッダー */
+header {
+    background: white;
+    padding: .5rem;
+    text-align: right;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #80808033;
+    padding: 13px 13px 13px 0;
+    height: 32px;
+}
+header img {
+    width: 200px;
+    position: absolute;
+    top: 15px;
+    left: 70px;
+}
+.menu_list {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 12px 0;
+}
+.menu_list li {
+    padding: .8rem 0 1rem;
+    border-bottom: 1px solid white;
+    list-style: none;
+}
+.menu_list li a {
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.btn_menu {
+    border-radius: 5px;
+    border: 1px solid #c8bd00;
+    background: transparent;
+    color: #c8bd00;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+}
+nav {
+    background: #c8bd00;
+    position: absolute;
+    z-index: 1;
+    top: 58px;
+    right: 0;
+    overflow-x: hidden;
+    text-align: center;
+    width: 0%;
+    transition: .5s;
+}
+nav.open-menu {
+    width: 100%;
 }
 
 .bold {font-weight: bold;}
@@ -12,7 +108,6 @@ body {
     padding: 10px 0 30px;
     text-align: center;
 }
-
 .pagenation ul{
     display: flex;
     justify-content: center;
@@ -26,6 +121,9 @@ body {
 .pagenation li a{
     color: #c8bd00;
 }
+
+
+/* シェアアプリ ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
 
 /* バリデーション common/erros.blade.php */
 .validation_error .errors{
@@ -83,31 +181,6 @@ body {
     margin: 0 0 20px;
 }
 
-/* ヘッダー */
-header {
-    background-color: white;
-    color: black;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    padding: 18px 20px 18px 0;
-    font-size: 18px;
-    border-bottom: 1px solid #80808033;
-}
-header h2 {
-    display: inline-block;
-    font-weight: bold;
-}
-header a i {
-    position: absolute;
-    right: 0;
-    font-size: 25px;
-    margin: 4px 15px 0 0;
-    color: #c8bd00;;
-}
-header img {
-    width: 200px;
-}
 
 /* 固定のメニューバー ーーーーーーーーーーーーーーーー  */
 .menu_fixed {
@@ -120,7 +193,8 @@ header img {
     list-style: none;
     width: 100%;
     text-align: center;
-    background: #fff;
+    background: #c8bd00;
+    color: white;
     margin-bottom: 0;
     padding: 12px 0;
     font-size: 15px;
@@ -129,12 +203,13 @@ header img {
 .menu_fixed li {
     display: flex;
     flex-direction: column;
+    color: white;
 }
 .menu_fixed li i {
     margin: 0 0 .5rem;
 }
 .menu_fixed span {
-    font-size: 15px;
+    font-size: 13px;
 }
 
 /* メイン */
@@ -148,17 +223,13 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 400px;
+    height: 150px;
     background-image: url("../img/main_image.jpg");
+    background-color:rgba(0,0,0,0.15);
+    background-blend-mode:darken;
     background-position: 0 0;
     background-size: cover;
     background-repeat: no-repeat;
-}
-.main_image h1 {
-    font-size: 25px;
-    font-weight: bold;
-    margin: 0 0 30px;
-    color: black;
 }
 .serch_bar .keyword {
     height: 35px;
@@ -208,15 +279,23 @@ main {
 }
 .find_by_recipe .pasta {
     background-image: url('../img/pasta.jpg');
+    background-color:rgba(255,255,255,0.2);
+    background-blend-mode:lighten;
 }
 .find_by_recipe .don {
     background-image: url('../img/don.jpg');
+    background-color:rgba(255,255,255,0.2);
+    background-blend-mode:lighten;
 }
 .find_by_recipe .curry {
     background-image: url('../img/curry.jpg');
+    background-color:rgba(255,255,255,0.2);
+    background-blend-mode:lighten;
 }
 .find_by_recipe .salada {
     background-image: url('../img/salada.jpg');
+    background-color:rgba(255,255,255,0.2);
+    background-blend-mode:lighten;
 }
 
 .category_bar {
@@ -231,7 +310,7 @@ main {
 .recipe_card {
     display: flex;
     padding: 15px 10px 15px;
-    border-top: 1px solid #80808033;
+    border-bottom: 1px solid #80808033;
 }
 .recipe_card img {
     width: 150px;
@@ -251,7 +330,7 @@ main {
 
 /* mypage.blade.php マイページ ーーーーーーーーーーーーーーーー  */
 .account_info {
-    height: 230px;
+    height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -339,7 +418,45 @@ main {
     color: tomato;
     margin: 0 0 0 10px;
 }
+.user_progress {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: bold;
+    font-size: 15px;
+    border-top: 1px solid #c8bd00;
+    border-bottom: 1px solid #c8bd00;
+    cursor: pointer;
+}
+.user_progress li {
+    width: 50%;
+    border-right: 1px solid white;
+    padding: 12px;
+    text-align: center;
+}
+.user_progress .on {
+    color: white;
+    background: #c8bd00;
+}
+.user_progress .off {
+    color: #c8bd00;
+    background: white;
+}
+.progress_title {
+    text-align: center;
+    box-sizing: border-box;
+    padding: 20px 0;
+}
+.progress_title span{
+    color: #808080ad;
+    padding: 12px 0;
+    border-bottom: 1px solid #808080ad;
+    font-size: 14px;
+}
 
+.hidden {
+    display: none;
+}
 
 /* create.php レシピ作成画面 ーーーーーーーーーーーーーーーー  */
 .form_layout {
@@ -488,4 +605,177 @@ input#file-upload-button {
     margin: 20px 0 0;
     font-weight: bold;
     font-size: 20px;
+}
+
+
+/* クッキングアプリ ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
+
+/* overview.blade.php ーーーーーーーーーーーーーーーー*/
+.overview_inner {
+    margin: 20px 10px;
+}
+.overview_inner img {
+    width: 100px;
+    height: 95px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.overview_inner .user_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0 20px;
+    margin: 0 0 10px;
+    border-radius: 10px;
+    border: 1px solid #c8bd0070;
+}
+.overview_inner .user_info .texts {
+    display: flex;
+    margin: 10px 0 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    justify-content: space-evenly;
+    height: 70px;
+}
+.overview_inner .user_info .texts h4 {
+    font-weight: bold;
+}
+.overview_inner .user_info .texts p {
+    color: gray;
+}
+.overview_title {
+    display: flex;
+    font-weight: bold;
+    font-size: 18px;
+    color: #c8bd00;
+    margin: 15px 0;
+}
+.overview_title h1 {
+    margin: 0 5px;
+}
+.course_card {
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 6px 1px #c8bd003b;
+    display: flex;
+}
+.course_card .left img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    padding: 10px 20px;
+}
+.course_card .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0 10px 0 0;
+}
+.course_card .right h3 {
+    font-weight: bold;
+}
+.course_card .right p {
+    font-size: 13px;
+    color: gray;
+}
+
+/* course.blade.php ーーーーーーーーーーーーーーーー*/
+.course_title {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color:rgba(0,0,0,0.15);
+    background-blend-mode:darken;
+    color: white;
+}
+.course_title h1 {
+    font-size: 30px;
+    margin: 0 0 20px;
+    font-weight: bold;
+}
+.course_title progress::-webkit-progress-bar {
+    background-color: #b3b3b3cb;
+}
+::-moz-progress-bar {
+    background-color: #b3b3b3cb;
+}
+
+.lesson_card {
+    margin: 5px;
+    padding: 20px;
+    box-shadow: 0 0 6px 1px #cccccc;
+    margin: 10px;
+}
+.lesson_card * {
+    margin: 0 0 20px;
+}
+.lesson_card h4 {
+    display: inline-block;
+    padding: 5px;
+    font-size: 15px;
+    border: 1px solid rgb(216, 213, 213);
+    border-radius: 20px;
+}
+.lesson_card h2 {
+    font-size: 22px;
+    font-weight: bold;
+}
+.lesson_card p {
+    color: #444444;
+    line-height: 1.5;
+}
+.lesson_card img {
+    width: 100%;
+    opacity: 0.9;
+}
+.lesson_card .btn {
+    display: block;
+    border-radius: 5px;
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+.lesson_card .completed {
+    color: rgba(116, 241, 78, 0.904);
+}
+.lesson_card .uncompleted {
+    color: orange;
+}
+
+/* lesson.blade.php ーーーーーーーーーーーーーーーー*/
+.completed_lesson_btn {
+    display: flex;
+    justify-content: center;
+}
+.completed_lesson_btn h4{
+    display: inline-block;
+    margin: 30px 0;
+    color: white;
+    background: rgb(216, 213, 213);
+    border-radius: 30px;
+    padding: 15px 50px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.lesson_complete_btn {
+    display: flex;
+    justify-content: center;
+}
+.lesson_complete_btn input{
+    border: none;
+    margin: 30px 0;
+    color: white;
+    background: #c8bd00;
+    border-radius: 30px;
+    padding: 15px 50px;
+    font-size: 15px;
+    font-weight: bold;
 }

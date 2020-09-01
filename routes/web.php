@@ -8,34 +8,38 @@ use Illuminate\Http\Request;
 // ページ一覧
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/saved', 'RecipesController@saved');
-    Route::get('/create', 'RecipesController@create');
+    Route::get('/saved', 'ShareController@saved');
+    Route::get('/create', 'ShareController@create');
     
     Route::get('/userpage/{user}', 'UsersController@userpage');
     Route::get('/useredit/{user}', 'UsersController@useredit');
     Route::post('/user/update', 'UsersController@update');
 
-    Route::get('/recipeedit/{recipe}', 'RecipesController@recipeedit');
-    Route::post('/recipe/update', 'RecipesController@update');
+    Route::get('/recipeedit/{recipe}', 'ShareController@recipeedit');
+    Route::post('/recipe/update', 'ShareController@update');
  });
 
-Route::get('/', 'RecipesController@find');
-Route::get('/list', 'RecipesController@list');
-Route::get('/result', 'RecipesController@result');
-Route::get('/recipe/{recipe}', 'RecipesController@detail');
+Route::get('/find', 'ShareController@find');
+Route::get('/result', 'ShareController@result');
+Route::get('/recipe/{recipe}', 'ShareController@detail');
 
 // レシピの検索
-Route::resource('/index', 'RecipesController');
+Route::resource('/index', 'ShareController');
 
 // レシピの追加
-Route::post('/store', 'RecipesController@store');
+Route::post('/store', 'ShareController@store');
 
 // ユーザーの削除
 Route::delete('/user/{user}', 'UsersController@destroy');
 // レシピの削除
-Route::delete('/recipe/{recipe}', 'RecipesController@destroy');
-
+Route::delete('/recipe/{recipe}', 'ShareController@destroy');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/overview', 'CookingController@overview');
+Route::get('/course/{course}', 'CookingController@course');
+Route::get('/course/{course}/lesson/{lesson}', 'CookingController@lesson');
+Route::post('/lesson/complete', 'CookingController@complete');
+
+// このページは現在しようしていない（ファイルは残したまま）
+// Route::get('/list', 'ShareController@list');

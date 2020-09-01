@@ -36,26 +36,23 @@
 
 <body>
     <div id="app">
+
         <header>
             <a href="{{ url('/') }}"><img src="{{asset('img/logo_big.png')}}" alt=""></a>
-            @auth
-            <a href="{{ url('/userpage/'.Auth::user()->id) }}"><i class="fas fa-user-cog"></i></a>
-            @endauth
-            @guest
-            <a href="{{ url('/login') }}"><i class="fas fa-user-cog"></i></a>
-            @endguest
+            <button class="btn_menu"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul class="menu_list">
+                <li><a href="{{ url('/overview') }}">コース一覧</a></li>
+                <li><a href="{{ url('/find') }}">つくレポ</a></li>
+                <li><a href="{{ url('/userpage/'.Auth::user()->id) }}">マイページ</a></li>
+                </ul>
+            </nav>
         </header>
 
         <main>
             @yield('content')
         </main>
 
-        <ul class="menu_fixed">
-                <a href="{{ url('/') }}"><li><i class="fas fa-search"></i><span>検索する</span></li></a>
-                <a href="{{ url('/list') }}"><li><i class="fas fa-stream"></i><span>新着レシピ</span></li></a>
-                <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
-                <a href="{{ url('/saved') }}"><li><i class="far fa-bookmark"></i><span>お気に入り</span></li></a>
-        </ul>
     </div>
 </body>
 

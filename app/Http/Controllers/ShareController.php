@@ -13,18 +13,8 @@ use App\Ingredient;
 use App\User;
 use Validator;
 
-class RecipesController extends Controller
-{
-
-    public function list(){
-        $recipes = Recipe::join('users', 'recipes.user_id', '=', 'users.id')
-        ->orderBy('recipes.created_at', 'desc')
-        ->select('recipes.id', 'recipes.title', 'recipes.hd_img', 'recipes.user_id', 'users.name')
-        ->paginate(10);
-        return view('list',compact('recipes'));
-    }
-
-    
+class ShareController extends Controller
+{   
     public function store(Request $request){
         //バリデーション
         $validator = Validator::make($request->all(), [
@@ -89,7 +79,7 @@ class RecipesController extends Controller
         $recipes = Recipe::join('users', 'recipes.user_id', '=', 'users.id')
         ->orderBy('recipes.created_at', 'desc')
         ->select('recipes.id', 'recipes.title', 'recipes.hd_img', 'users.name')
-        ->take(4)->get();
+        ->take(8)->get();
         return view('find', compact('recipes'));
     }
 
@@ -167,10 +157,12 @@ class RecipesController extends Controller
 
 
     public function destroy(Recipe $recipe){
+        Storage::delete('public/img/'.$recipe->hd_img);
         $ingredient = Ingredient::where('recipe_id',$recipe->id)->delete();
         $processes = Process::where('recipe_id',$recipe->id)->get();
         foreach ($processes as $process){
             $process->delete();
+            Storage::delete('public/img/'.$process->image);
         }
         $recipe->delete();
         return redirect('userpage/'.$recipe->user_id);
@@ -190,5 +182,14 @@ class RecipesController extends Controller
     #ページネーション
     $recipes = $query->orderBy('created_at','desc')->paginate(10);
     return view('result', compact('recipes', 'keyword'));
+    }
+
+    // このページは現在しようしていない（ファイルは残したまま）
+    public function list(){
+        $recipes = Recipe::join('users', 'recipes.user_id', '=', 'users.id')
+        ->orderBy('recipes.created_at', 'desc')
+        ->select('recipes.id', 'recipes.title', 'recipes.hd_img', 'recipes.user_id', 'users.name')
+        ->paginate(10);
+        return view('list',compact('recipes'));
     }
 }

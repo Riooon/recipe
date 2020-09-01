@@ -6,16 +6,15 @@
 <div class="row">
  
     <div class="main_image">
-        <h1>今日は何作ろう...</h1>
         <div class="serch_bar">
             <form action="{{url('index')}}" method="GET">
-            <input class="keyword" type="text" name="keyword" value="" placeholder="　レシピを探す"><input type="submit" class="fas btn" value="&#xf002">
+            <input class="keyword" type="text" name="keyword" value="" placeholder="　レシピを検索"><input type="submit" class="fas btn" value="&#xf002">
             </form>
         </div>
     </div>
 
     <div class="find_by_recipe">
-        <p class="category_bar">レシピを探す</p>
+        <p class="category_bar">カテゴリーで探す</p>
         <ul>
             <form action="{{url('index')}}" method="GET"><input type="submit" name="keyword" value="パスタ" class="pasta"></form>
             <form action="{{url('index')}}" method="GET"><input type="submit" name="keyword" value="丼" class="don"></form>
@@ -25,7 +24,7 @@
     </div>
 
     <div class="latest_recipes">
-        <p class="category_bar">新着レシピ</p>
+        <p class="category_bar">新着レシピ一覧</p>
         @foreach ($recipes as $recipe)
             <div class="recipe_card">
                 <a href="{{ url('recipe/'.$recipe->id) }}"><img src="{{ asset('storage/img/'.$recipe->hd_img), true }}" alt onerror="this.onerror"></a>
@@ -38,5 +37,9 @@
         @endforeach
     </div>
 
-
+    <ul class="menu_fixed">
+        <a href="{{ url('/find') }}"><li><i class="fas fa-search"></i><span>検索する</span></li></a>
+        <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
+        <a href="{{ url('/saved') }}"><li><i class="far fa-bookmark"></i><span>お気に入り</span></li></a>
+    </ul>
 @endsection

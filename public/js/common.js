@@ -1,3 +1,12 @@
+// ハンバーガーメニューの表示 (app.blade.php)
+const btn = document.querySelector('.btn_menu');
+const nav = document.querySelector('nav');
+ 
+btn.addEventListener('click', () => {
+  nav.classList.toggle('open-menu')
+});
+
+
 // レシピ工程の順番　（create.blade.php）
 
 let block_0 = $("#block_0");
@@ -99,4 +108,28 @@ $("#delete").on("click", function(){
     if(!confirm("削除してよろしいですか？")){
       return false;
     }
+});
+
+// ユーザーページの切り替え （userpage.blade.php）
+$("#userpage_lesson").on("click", function(){
+  $("#userpage_lesson").removeClass("off");
+  $("#userpage_lesson").addClass("on");
+  $("#userpage_recipe").removeClass("on");
+  $("#userpage_recipe").addClass("off");
+  $("#recipe_block").addClass("hidden");
+  $("#recipe_block").addClass("hidden");
+  $("#lesson_block").removeClass("hidden");
+  $("#lesson_num").removeClass("hidden");
+  $("#recipe_num").addClass("hidden");
+});
+
+$("#userpage_recipe").on("click", function(){
+  $("#userpage_recipe").removeClass("off");
+  $("#userpage_recipe").addClass("on");
+  $("#userpage_lesson").removeClass("on");
+  $("#userpage_lesson").addClass("off");
+  $("#lesson_block").addClass("hidden");
+  $("#recipe_block").removeClass("hidden");
+  $("#recipe_num").removeClass("hidden");
+  $("#lesson_num").addClass("hidden");
 });
