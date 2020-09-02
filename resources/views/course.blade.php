@@ -10,6 +10,7 @@
 
 @foreach($lesson_blocks as $lesson_block)
     @for ($i = 0; $i < count($lesson_block); $i++)
+
         <div class="lesson_card">
             @if(!$lesson_block[$i][1]==NULL)
                 <h4 class="completed">コース終了！</h4>
@@ -21,6 +22,7 @@
             <p>ここに説明を加えます。ここに説明を加えます。ここに説明を加えます。</p>
             <a href="{{ url('course/'.$course_items->english.'/lesson/'.$lesson_block[$i][0]->lesson_id) }}" class="btn" style="background: #c8bd00">これがボタン</a>
         </div>
+        
     @endfor
 @endforeach
 
