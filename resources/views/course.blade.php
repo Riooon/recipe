@@ -9,7 +9,6 @@
 <ul>
 
 @foreach($lesson_blocks as $lesson_block)
-
     @for ($i = 0; $i < count($lesson_block); $i++)
         <div class="lesson_card">
             @if(!$lesson_block[$i][1]==NULL)
@@ -23,7 +22,6 @@
             <a href="{{ url('course/'.$course_items->english.'/lesson/'.$lesson_block[$i][0]->lesson_id) }}" class="btn" style="background: #c8bd00">これがボタン</a>
         </div>
     @endfor
-
 @endforeach
 
 </ul>
