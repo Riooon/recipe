@@ -36,10 +36,12 @@ Route::delete('/recipe/{recipe}', 'ShareController@destroy');
 
 Auth::routes();
 
+Route::get('/', 'CookingController@home');
 Route::get('/overview', 'CookingController@overview');
 Route::get('/course/{course}', 'CookingController@course');
 Route::get('/course/{course}/lesson/{lesson}', 'CookingController@lesson');
 Route::post('/lesson/complete', 'CookingController@complete');
+Route::get('/course/{course}/lesson/{lesson}/play', 'CookingController@play');
 
 // このページは現在しようしていない（ファイルは残したまま）
 // Route::get('/list', 'ShareController@list');

@@ -38,13 +38,19 @@
     <div id="app">
 
         <header>
-            <a href="{{ url('/') }}"><img src="{{asset('img/logo_big.png')}}" alt=""></a>
+            <a href="{{ url('/overview') }}"><img src="{{asset('img/logo_big.png')}}" alt=""></a>
             <button class="btn_menu"><i class="fas fa-bars"></i></button>
             <nav>
                 <ul class="menu_list">
+                @guest
+                <li><a href="{{ url('/overview') }}">コース一覧</a></li>
+                <li><a href="{{ url('/register') }}">会員登録</a></li>
+                <li><a href="{{ url('/login') }}">ログイン</a></li>
+                @else
                 <li><a href="{{ url('/overview') }}">コース一覧</a></li>
                 <li><a href="{{ url('/find') }}">つくレポ</a></li>
                 <li><a href="{{ url('/userpage/'.Auth::user()->id) }}">マイページ</a></li>
+                @endauth
                 </ul>
             </nav>
         </header>

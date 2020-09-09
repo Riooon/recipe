@@ -52,47 +52,47 @@
         </header>
 
         <main>
-            <div class="recipe_heaader">
-                <img src="{{ asset('storage/img/'.$recipe->hd_img), true }}" alt onerror="this.onerror">
-                <h1>{{ $recipe->title }}</h1>
-            </div>
-            <p class="category_bar">お買い物リスト</p>
-            <ul class="shopping_list">
-            @if (count($ingredients) > 0)
-                @for ($i = 0; $i < 7; $i++)
-                    @if(!$ingredients->first()->{"ingredient_".$i}==NULL)
-                    <li>{{ $ingredients->first()->{"ingredient_".$i} }}</li>
-                    @endif
-                @endfor
-            @endif
-
-            </ul>
-
-            <p class="category_bar">レシピ詳細</p>
-
-            @if (count($processes) > 0)
-                @foreach ($processes as $process)
-                
-                @if(!$process->image==NULL || !$process->text==NULL)
-                    <div class="recipe_prosess">
-                        @if(!$process->image==NULL)
-                        <img src="{{ asset('storage/img/'.$process->image), true }}" alt onerror="this.onerror">
+            <div class="recipe_inner">
+                <div class="recipe_heaader" style="background-image: url('{{ asset('storage/img/'.$recipe->hd_img), true }}');">
+                    <h1>{{ $recipe->title }}</h1>
+                </div>
+                <p class="category_bar">お買い物リスト</p>
+                <ul class="shopping_list">
+                @if (count($ingredients) > 0)
+                    @for ($i = 0; $i < 7; $i++)
+                        @if(!$ingredients->first()->{"ingredient_".$i}==NULL)
+                        <li>{{ $ingredients->first()->{"ingredient_".$i} }}</li>
                         @endif
-                        @if(!$process->text==NULL)
-                        <p>{{$process->text}}</p>
-                        @endif
-                    </div>
+                    @endfor
                 @endif
 
-                @endforeach
-            @endif
+                </ul>
+
+                <p class="category_bar">レシピ詳細</p>
+
+                @if (count($processes) > 0)
+                    @foreach ($processes as $process)
+                    
+                    @if(!$process->image==NULL || !$process->text==NULL)
+                        <div class="recipe_prosess">
+                            @if(!$process->image==NULL)
+                            <img src="{{ asset('storage/img/'.$process->image), true }}" alt onerror="this.onerror">
+                            @endif
+                            @if(!$process->text==NULL)
+                            <p>{{$process->text}}</p>
+                            @endif
+                        </div>
+                    @endif
+
+                    @endforeach
+                @endif
+            </div>
         </main>
 
         <ul class="menu_fixed">
-                <a href="{{ url('/find') }}"><li><i class="fas fa-search"></i><span>検索する</span></li></a>
-                <a href="{{ url('/list') }}"><li><i class="fas fa-stream"></i><span>新着レシピ</span></li></a>
-                <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
-                <a href="{{ url('/saved') }}"><li><i class="far fa-bookmark"></i><span>お気に入り</span></li></a>
+            <a href="{{ url('/find') }}"><li><i class="fas fa-search"></i><span>検索する</span></li></a>
+            <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
+            <a href="{{ url('/saved') }}"><li><i class="far fa-bookmark"></i><span>お気に入り</span></li></a>
         </ul>
     </div>
 

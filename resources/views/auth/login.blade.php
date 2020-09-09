@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="auth_title">
-    <h1>いつもありがとうございます！</h1>
+    <h1>おかえりなさい！</h1>
 </div>
 
 <form method="POST" action="{{ route('login') }}">

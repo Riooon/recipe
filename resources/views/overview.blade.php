@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
+<div class="overview_top">
+    <h1>コース一覧</h1>
+</div>
 <div class="overview_inner">
+    @auth
     <div class="user_info">
         <img src="{{ asset('storage/img/'.Auth::user()->icon) }}">
         <div class="texts">
@@ -9,9 +13,10 @@
             <progress max="1" value="{{ Auth::user()->level - floor(Auth::user()->level) }}">{{ Auth::user()->level - floor(Auth::user()->level) }}%</progress>
         </div>
     </div>
+    @endauth
     <div class="overview_title">
         <i class="fas fa-list-alt"></i>
-        <h1>コース一覧</h1>
+        <h2>コース一覧</h2>
     </div>
 
     <ul>
@@ -21,11 +26,11 @@
         <a href="{{ url('course/'.$course_block[$i][0]->english ) }}">
         <div class="course_card">
             <div class="left">
-                <img src="{{asset('img/logo_small.png')}}">
+                <img src="{{asset('img/'.$course_block[$i][0]->image)}}">
             </div>
             <div class="right">
                 <h3>{{ $course_block[$i][0]->name }}</h3>
-                <p>説明文（このコースではこういうことを勉強します。）</p>
+                <p>{{ $course_block[$i][0]->desc }}</p>
                 <p>このコースの達成率  {{ $course_block[$i][1] }}%</p>
             </div>
         </div>

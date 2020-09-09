@@ -38,11 +38,11 @@
 
             <div class="course_card">
                 <div class="left">
-                    <img src="{{asset('img/logo_small.png')}}">
+                    <img src="{{asset('img/'.$course_block[$i][0]->image)}}">
                 </div>
                 <div class="right">
                     <h3>{{ $course_block[$i][0]->name }}</h3>
-                    <p>説明文（このコースではこういうことを勉強します。）</p>
+                    <p>{{ $course_block[$i][0]->desc }}</p>
                     <p>このコースの達成率  {{ $course_block[$i][1] }}%</p>
                 </div>
             </div>

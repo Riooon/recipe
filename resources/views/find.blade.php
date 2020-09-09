@@ -2,9 +2,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container-fluid">
-<div class="row">
- 
+<div class="recipe_inner">
     <div class="main_image">
         <div class="serch_bar">
             <form action="{{url('index')}}" method="GET">
@@ -42,4 +40,5 @@
         <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
         <a href="{{ url('/saved') }}"><li><i class="far fa-bookmark"></i><span>お気に入り</span></li></a>
     </ul>
+</div>
 @endsection

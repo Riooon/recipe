@@ -14,11 +14,17 @@ use App\CompletedLesson;
 
 class CookingController extends Controller
 {
+    public function home(){
+        return view('home');
+    }
+
     public function overview(){
         $course_blocks = array();
         $course_item = array(); 
         $courses = Course::orderBy('id', 'asc')->get();
+
         foreach($courses as $course){
+            if( isset(Auth::user()->id) ){
             //コースの達成率を取得・計算
             $lesson_num
             =count(Lesson::where('course_id',$course->id)->get());
@@ -26,6 +32,9 @@ class CookingController extends Controller
              =count(CompletedLesson::where('user_id',Auth::user()->id)
               ->where('course_id',$course->id)->get());
             $achieved_rate = round($completed_lesson_num / $lesson_num * 100);
+            } else {
+                $achieved_rate = 0;
+            }
             array_push($course_item, [$course, $achieved_rate]);
         }
         array_push($course_blocks, $course_item);
@@ -36,8 +45,9 @@ class CookingController extends Controller
 
     public function course($course){
         $course_items=Course::where('english',$course)->first();
-        $lessons = Lesson::where('course_id',$course_items->id)->orderBy('id', 'asc')->get();
+        $lessons = Lesson::where('course_id',$course_items->id)->orderBy('lesson_id', 'asc')->get();
 
+        if( isset(Auth::user()->id) ){
         $completed_lessons = CompletedLesson::where('user_id',Auth::user()->id)
         ->where('course_id',$course_items->id)->get();
         //コースの達成率を取得・計算
@@ -46,13 +56,19 @@ class CookingController extends Controller
         $completed_lesson_num
          =count($completed_lessons);
         $achieved_rate = round($completed_lesson_num / $lesson_num * 100);
-
+        } else {
+            $achieved_rate = 0;
+        }
         // レッスンの達成/未達成を取得
         $lesson_blocks = array();
         $lesson_item = array();
         foreach($lessons as $lesson){
+            if( isset(Auth::user()->id) ){
             $check_if_finish = CompletedLesson::where('user_id',Auth::user()->id)
             ->where('course_id',$course_items->id)->where('lesson_id',$lesson->lesson_id)->value('id');
+            } else {
+                $check_if_finish = NULL;
+            }
             array_push($lesson_item, [$lesson, $check_if_finish]);
         }
         array_push($lesson_blocks, $lesson_item);
@@ -65,9 +81,13 @@ class CookingController extends Controller
         $course_items=Course::where('english',$course)->first();
         $lesson_items=Lesson::where('course_id', $course_items->id)->where('lesson_id', $lesson)->first();
 
+        if( isset(Auth::user()->id) ){
         $check_if_finish = CompletedLesson::where('user_id',Auth::user()->id)
         ->where('course_id',$course_items->id)->where('lesson_id',$lesson_items->lesson_id)->value('id');
-        return view('lesson', compact('lesson_items', 'check_if_finish'));
+        } else {
+            $check_if_finish = NULL;
+        }
+        return view('lesson', compact('course_items','lesson_items', 'check_if_finish'));
     }
 
 
@@ -97,5 +117,11 @@ class CookingController extends Controller
 
     $course = Course::find($request->course_id);
     return redirect('/course/'.$course->english);
+    }
+
+    public function play($course_name, $lesson){
+        $course = Course::where('english',$course_name)->first();
+        $lesson = Lesson::where('course_id', $course->id)->where('lesson_id', $lesson)->first();
+        return view('play', compact('lesson', 'course'));
     }
 }
