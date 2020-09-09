@@ -36,6 +36,7 @@
         @foreach($course_blocks as $course_block)
             @for ($i = 0; $i < count($course_block); $i++)
 
+            <a href="{{ url('course/'.$course_block[$i][0]->english ) }}">
             <div class="course_card">
                 <div class="left">
                     <img src="{{asset('img/'.$course_block[$i][0]->image)}}">
@@ -43,9 +44,10 @@
                 <div class="right">
                     <h3>{{ $course_block[$i][0]->name }}</h3>
                     <p>{{ $course_block[$i][0]->desc }}</p>
-                    <p>このコースの達成率  {{ $course_block[$i][1] }}%</p>
+                    <progress max="100" value="{{ $course_block[$i][1] }}">{{ $course_block[$i][1] }}%</progress>
                 </div>
             </div>
+            </a>
             @endfor
         @endforeach
     </div>

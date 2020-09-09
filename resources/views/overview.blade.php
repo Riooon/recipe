@@ -31,7 +31,7 @@
             <div class="right">
                 <h3>{{ $course_block[$i][0]->name }}</h3>
                 <p>{{ $course_block[$i][0]->desc }}</p>
-                <p>このコースの達成率  {{ $course_block[$i][1] }}%</p>
+                <progress max="100" value="{{ $course_block[$i][1] }}">{{ $course_block[$i][1] }}%</progress>
             </div>
         </div>
         </a>
