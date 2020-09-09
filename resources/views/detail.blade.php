@@ -27,7 +27,7 @@
     <meta property="og:locale" content="ja_JP">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{$recipe->title}}">
-    <meta property="og:description" content="{{$recipe->title}}の作り方。「お金なし・スキルなし・食材なし」の海外留学生でも簡単に作れるレシピが盛りだくさん。">
+    <meta property="og:description" content="Okome Modeでシェアされた料理のご紹介です。楽しみながら、ステップバイステップで料理を学びましょう！">
     <meta property="og:url" content="https://okomemode.com/recipe/{{$recipe->id}}">
     <meta property="og:image" content="http://okomemode.com/storage/img/{{$recipe->hd_img}}">
     <meta property="og:site_title" content="Okome Mode">
