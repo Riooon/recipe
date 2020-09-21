@@ -11,7 +11,6 @@
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/common.js') }}" defer></script>
     <script src="https://use.fontawesome.com/71ade6c4b0.js"></script>
 
@@ -44,9 +43,16 @@
             <button class="btn_menu"><i class="fas fa-bars"></i></button>
             <nav>
                 <ul class="menu_list">
-                <li><a href="{{ url('/overview') }}">コース一覧</a></li>
-                <li><a href="{{ url('/find') }}">つくレポ</a></li>
-                <li><a href="{{ url('/userpage/'.Auth::user()->id) }}">マイページ</a></li>
+                    @guest
+                    <li><a href="{{ url('/find') }}">レシピを探す</a></li>
+                    <li><a href="{{ url('/login') }}">ログイン</a></li>
+                    <li><a href="{{ url('/register') }}">会員登録</a></li>
+                    @else
+                    <li><a href="{{ url('/find') }}">レシピを探す</a></li>
+                    <li><a href="{{ url('/userpage/'.Auth::user()->id) }}">マイページ</a></li>
+                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('ログアウト') }}</a></li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                    @endauth
                 </ul>
             </nav>
         </header>
@@ -55,29 +61,38 @@
             <div class="recipe_inner">
                 <div class="recipe_heaader" style="background-image: url('{{ asset('storage/img/'.$recipe->hd_img), true }}');">
                     <h1>{{ $recipe->title }}</h1>
+                    <a href="{{ url('/recipe/'.$recipe->id.'/play') }}"><i class="far fa-play-circle"></i><span> 手順を再生</span></a>
                 </div>
-                <p class="category_bar">お買い物リスト</p>
-                <ul class="shopping_list">
-                @if (count($ingredients) > 0)
-                    @for ($i = 0; $i < 7; $i++)
-                        @if(!$ingredients->first()->{"ingredient_".$i}==NULL)
-                        <li>{{ $ingredients->first()->{"ingredient_".$i} }}</li>
-                        @endif
-                    @endfor
-                @endif
 
-                </ul>
+                <p class="category_bar">お買い物リスト</p>
+                
+                @if (count($ingredients) > 0)
+                <div class="shopping_list">
+                    @foreach ($ingredients as $ingredient)
+                        @if(!$ingredient->ingredient==NULL)
+                            <ul>
+                                <li class="take_up">{{$ingredient->ingredient}}</li>
+                                <li>{{$ingredient->amount}}</li>
+                                @if($ingredient->unit==0)
+                                <li class="space">個</li>
+                                @elseif($ingredient->unit==1)
+                                <li class="space">g</li>
+                                @elseif($ingredient->unit==2)
+                                <li class="space">ml</li>
+                                @endif
+                            </ul>
+                        @endif
+                    @endforeach
+                </div>
+                @endif
 
                 <p class="category_bar">レシピ詳細</p>
 
                 @if (count($processes) > 0)
                     @foreach ($processes as $process)
                     
-                    @if(!$process->image==NULL || !$process->text==NULL)
+                    @if(!$process->text==NULL)
                         <div class="recipe_prosess">
-                            @if(!$process->image==NULL)
-                            <img src="{{ asset('storage/img/'.$process->image), true }}" alt onerror="this.onerror">
-                            @endif
                             @if(!$process->text==NULL)
                             <p>{{$process->text}}</p>
                             @endif
@@ -86,14 +101,24 @@
 
                     @endforeach
                 @endif
+
+                @auth
+                <form action="{{ url('stock/add') }}" method="POST" class="stock_form">
+                    {{ csrf_field() }}
+                    <input type="submit" value="献立に追加" class="stock_btn">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
+                </form>
+                @endauth
             </div>
         </main>
 
-        <ul class="menu_fixed">
-            <a href="{{ url('/find') }}"><li><i class="fas fa-search"></i><span>検索する</span></li></a>
-            <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
-            <a href="{{ url('/saved') }}"><li><i class="far fa-bookmark"></i><span>お気に入り</span></li></a>
-        </ul>
+    <ul class="menu_fixed">
+        <a href="{{ url('/overview') }}"><li><i class="fas fa-pencil-alt"></i><span>コース一覧</span></li></a>
+        <a href="{{ url('/find') }}"><li><i class="fas fa-search"></i><span>検索する</span></li></a>
+        <a href="{{ url('/stock') }}"><li><i class="fas fa-book-open"></i><span>今週の献立</span></li></a>
+        <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
+    </ul>
     </div>
 
 </body>

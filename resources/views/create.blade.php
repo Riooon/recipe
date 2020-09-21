@@ -24,11 +24,19 @@
             <h4 class="cooking_procedure">お買い物リスト</h4>
             <div class="form_inner">
                 @for ($i = 0; $i < 7; $i++)
-                <p><input type="text" name="ingredient_{{$i}}" class="ingredients"></p>
+                <div class="form_each">
+                    <input type="text" placeholder="材料 {{$i}}" name="ingredient_{{$i}}" class="ingredients">
+                    <input type="number" name="amount_{{$i}}" class="amount">
+                    <select name="unit_{{$i}}" class="units">
+                        <option value="0">個</option>
+                        <option value="1">g</option>
+                        <option value="2">ml</option>
+                    </select>
+                </div>
                 @endfor
             </div>
             
-
+            
             <h4 class="cooking_procedure">作り方</h4>
             <div class="form_inner">
                 <div class="recipe_blocks">
@@ -53,6 +61,7 @@
                 </div>
                 
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="level_up" value="0.5">
                 <button type="button" id="recipe_submit">送信</button>
 
             </div>
@@ -60,11 +69,5 @@
 
     </div>
 
-
-    <ul class="menu_fixed">
-            <a href="{{ url('/find') }}"><li><i class="fas fa-search"></i><span>検索する</span></li></a>
-            <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
-            <a href="{{ url('/saved') }}"><li><i class="far fa-bookmark"></i><span>お気に入り</span></li></a>
-    </ul>
 </div>
 @endsection

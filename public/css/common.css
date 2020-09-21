@@ -367,6 +367,9 @@ nav.open-menu {
     padding: 15px 10px 15px;
     border-bottom: 1px solid #80808033;
 }
+.recipe_card:first-child {
+    border-top: 1px solid #80808033;
+}
 .recipe_card img {
     width: 150px;
     height: 150px;
@@ -385,10 +388,10 @@ nav.open-menu {
 
 /* mypage.blade.php マイページ ーーーーーーーーーーーーーーーー  */
 .account_info {
-    height: 180px;
+    height: 250px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     margin: 20px 0;
 }
@@ -401,15 +404,19 @@ nav.open-menu {
 .account_info h4 {
     font-weight: bold;
     font-size: 20px;
+    margin: 10px 0;
+}
+.account_info progress {
+    margin: 0 0 15px;
 }
 .account_info .edit_btn {
-    margin: 10px 0 0;
     color: white;
     background: #c8bd00;
     border-radius: 10px;
     padding: 10px 20px;
     font-size: 12px;
     font-weight: bold;
+    margin: 20px 0;
 }
 .thanks_for_posts {
     font-size: 13px;
@@ -504,7 +511,7 @@ nav.open-menu {
 }
 .progress_title span{
     color: #808080ad;
-    padding: 12px 0;
+    padding: 8px 0;
     border-bottom: 1px solid #808080ad;
     font-size: 14px;
 }
@@ -521,6 +528,10 @@ nav.open-menu {
     margin: 20px 0;
     padding: 0 12.5%;
     text-align: center;
+}
+.form_each {
+    display: flex;
+    margin: 0 0 10px;
 }
 .recipe_form {
     width: 100%;
@@ -553,14 +564,35 @@ input#file-upload-button {
     color: blue;
 }
 .recipe_form .ingredients {
-    width: 100%;
     border: none;
     border-bottom: 1px solid #80808033;
-    margin: 0 0 10px;
+    margin: 0 10px 0 0;
     height: 30px;
     line-height: 30px;
+    flex-grow: 2;
     font-size: 15px;
 }
+.recipe_form .amount {
+    border: none;
+    border-bottom: 1px solid #80808033;
+    height: 30px;
+    line-height: 30px;
+    width: 50px;
+    font-size: 15px;
+}
+
+.units {
+    /* styling */
+    background-color: white;
+    border: thin solid #80808033;
+    border-radius: 4px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    padding: 5px;
+    font-size: 0.8rem;
+}
+
 .recipe_form .text textarea{
     box-sizing: border-box;
     width: 100%;
@@ -577,6 +609,9 @@ input#file-upload-button {
 }
 .recipe_block .text {
     margin: 15px 0 0;
+}
+.recipe_block .text textarea {
+    font-size: 15px;
 }
 .recipe_block .updown {
     display: flex;
@@ -637,43 +672,111 @@ input#file-upload-button {
     height: 300px;
     object-fit: cover;
 }
-
-.recipe_prosess{
-    padding: 30px;
-    border-top: 1px solid#80808033;
+.recipe_heaader a {
+    color: white;
+    font-weight: bold;
     display: flex;
-    flex-direction: column;
-}
-
-.recipe_prosess img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    margin: 0 0 30px;
-}
-.shopping_list li{
-    padding: 12px;
-    border-bottom: 1px solid#80808033;
-}
-
-/* saved.blade.php 保存した投稿のページ ーーーーーーーーーーーーーーーー */
-.coming_soon {
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
-.coming_soon img {
-    width: 180px;
-    object-fit: cover;
+.recipe_heaader a i {
+    font-size: 28px;
+    margin: 0 5px 0 0;
 }
-.coming_soon h1 {
-    margin: 20px 0 0;
+.recipe_heaader a span {
+    font-size: 15px;
+    text-decoration: underline;
+}
+.recipe_prosess{
+    padding: 20px 12px;
+    border-bottom: 1px solid#80808033;
+    display: flex;
+    flex-direction: column;
+}
+.shopping_list ul{
+    padding: 12px;
+    border-bottom: 1px solid#80808033;
+    display: flex;
+}
+.shopping_list ul .take_up {
+    flex-grow: 2;
+}
+.shopping_list ul .space{
+    margin: 0 5px;
+}
+.stock_form {
+    text-align: center;
+}
+.stock_btn {
+    border: none;
+    margin: 30px 0;
+    color: white;
+    font-size: 15px;
     font-weight: bold;
-    font-size: 20px;
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: #FFF;
+    background: #c8bd00;
+    border-bottom: solid 2px #8e8600;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
+}
+.stock_btn:active {
+    border-bottom: solid 2px #c8bd00;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 }
 
+/* stocked.blade.php 保存した投稿のページ ーーーーーーーーーーーーーーーー */
+.recipe_horizontal_card {
+    padding: 10px 0;
+    margin: 10px 10px;
+    border-radius: 6px;
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 6px 1px #c8bd003b;
+    display: flex;
+}
+.recipe_horizontal_card .left img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    padding: 0 20px;
+    border-radius: 20%;
+}
+.recipe_horizontal_card .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0 10px 0 0;
+}
+.recipe_horizontal_card .right h3 {
+    font-weight: bold;
+    text-decoration: underline;
+}
+.stock_remove_btn {
+    border: none;
+    background: tomato;
+    color: white;
+    border-radius: 5px;
+}
+.stock_destroy_form {
+    text-align: center;
+}
+.stock_destroy {
+    border: none;
+    margin: 30px 0;
+    color: white;
+    background: #c8bd00;
+    border-radius: 30px;
+    padding: 15px 60px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.stock_else {
+    padding: 20px 10px;
+    font-size: 15px;
+    color: gray;
+}
 
 /* クッキングアプリ ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
 
@@ -738,7 +841,7 @@ input#file-upload-button {
 }
 .course_card {
     padding: 20px 0;
-    margin: 10px 0;
+    margin: 10px;
     border-radius: 6px;
     border: 1px solid #cccccc;
     box-shadow: 0 0 6px 1px #c8bd003b;
@@ -833,21 +936,14 @@ input#file-upload-button {
 }
 .lesson_card .completed {
     color: rgba(116, 241, 78, 0.904);
+    font-weight: bold;
 }
 .lesson_card .uncompleted {
     color: orange;
+    font-weight: bold;
 }
 
 /* lesson.blade.php ーーーーーーーーーーーーーーーー*/
-.recipe_heaader a {
-    color: white;
-    background: #c8bd00;
-    border-radius: 30px;
-    padding: 15px 50px;
-    font-size: 15px;
-    font-weight: bold;
-    width: 35%;
-}
 .completed_lesson_btn {
     display: flex;
     justify-content: center;

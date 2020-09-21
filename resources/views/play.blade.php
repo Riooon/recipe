@@ -11,6 +11,9 @@
         src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
     <script async custom-element="amp-story"
         src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+      <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+        <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400" rel="stylesheet">
     <style amp-custom>
       amp-story {
@@ -58,6 +61,19 @@
       amp-img {
         opacity: 0.8;
       }
+      form input {
+        border: none;
+        margin: 30px 0;
+        color: white;
+        background: #c8bd00;
+        border-radius: 30px;
+        padding: 13px 70px;
+        font-size: 17px;
+        font-weight: bold;
+      }
+      .finish {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -67,58 +83,52 @@
         publisher="AMP tutorials"
         publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
+
       <amp-story-page id="cover">
         <amp-story-grid-layer template="fill">
-          <amp-img src="{{ asset('img/'.$lesson->hd_img) }}"
+          <amp-img src="{{ asset('storage/img/'.$recipe->hd_img) }}"
               width="720" height="1280"
               layout="responsive">
           </amp-img>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="vertical">
-          <h1>{{ $lesson->name }}</h1>
-          <p>レッスン {{ $lesson->lesson_id }}</p>
+          <h1>{{ $recipe->title }}</h1>
         </amp-story-grid-layer>
       </amp-story-page>
 
-      <!-- Page 1 (Cat): 1 layer (vertical) -->
-      <!-- <amp-story-page id="page1">
-        <amp-story-grid-layer template="vertical">
-          <h1>Cats</h1>
-          <amp-img src="{{ asset('img/'.$lesson->hd_img) }}"
-              width="720" height="1280"
-              layout="responsive">
-          </amp-img>
-          <q>Dogs come when they're called. Cats take a message and get back to you. --Mary Bly</q>
-        </amp-story-grid-layer>
-      </amp-story-page> -->
-
-
-      @for ($i = 0; $i < 9; $i++)
-      @if(!$lesson->{"process_".$i}==NULL)
-      <amp-story-page id="page{{$i-1}}">
+      @for ($i = 0; $i < count($processes); $i++)
+      <amp-story-page id="page{{$i+1}}">
         <amp-story-grid-layer template="fill">
-          <amp-img src="{{ asset('img/'.$lesson->hd_img) }}"
-              width="720" height="1280"
-              layout="responsive">
-          </amp-img>
+          @if(!$processes[$i]->image==NULL)
+            <amp-img src="{{ asset('storage/img/'.$processes[$i]->image) }}" width="720" height="1280" layout="responsive"></amp-img>
+          @else
+            <amp-img src="{{ asset('storage/img/'.$recipe->hd_img) }}" width="720" height="1280" layout="responsive"></amp-img>
+          @endif
         </amp-story-grid-layer>
-          <amp-story-grid-layer template="seconds">
-            <p grid-area="lower-second">{!! $lesson->{"process_".$i} !!}</p>
+        <amp-story-grid-layer template="seconds">
+          <p grid-area="lower-second">{{ $processes[$i]->text }}</p>
         </amp-story-grid-layer>
       </amp-story-page>
-      @endif
       @endfor
 
+      <amp-story-page id="end">
+        <amp-story-grid-layer template="fill">
+          <amp-img src="{{ asset('storage/img/'.$recipe->hd_img) }}" width="720" height="1280" layout="responsive"></amp-img>
+        </amp-story-grid-layer>
+        <amp-story-grid-layer template="seconds">
+          <form grid-area="ower-second" action="{{ url('recipe/'.$recipe->id) }}" method="get">
+            <p class="finish">完成です！</p>
+            <input type="submit" value="レシピを閉じる">
+          </form>
+        </amp-story-grid-layer>
+      </amp-story-page>
+      
       <!-- Bookend -->
       
       <amp-story-bookend layout=nodisplay>
       <script type="application/json">
         {
         "bookendVersion": "v1.0",
-        "shareProviders": [
-          "twitter",
-          "facebook"
-        ],
         "components": [
           {
             "type": "heading",
@@ -126,22 +136,26 @@
           },
           {
             "type": "small",
-            "title": "このレッスンを完了する",
-            "url": "{{ url('/course/'.$course->english.'/lesson/'.$lesson->lesson_id) }}",
-            "image": "{{ asset('img/'.$lesson->hd_img) }}"
+            "title": "レシピを閉じる",
+            "url": "{{ url('/recipe/'.$recipe->id)}}",
+            "image": "{{ asset('storage/img/'.$recipe->hd_img) }}"
           },
           {
             "type": "small",
-            "title": "レッスン一覧",
-            "url": "{{ url('/course/'.$course->english) }}",
-            "image": "{{ asset('img/'.$course->image) }}"
+            "title": "ストックレシピ一覧",
+            "url": "{{ url('/stock')}}",
+            "image": "{{ asset('img/recipe_book.jpg') }}"
           },
           {
             "type": "small",
             "title": "トップに戻る",
-            "url": "{{ url('/overview') }}",
+            "url": "{{ url('/overview')}}",
             "image": "{{ asset('img/main_image.jpg') }}"
           }
+        ],
+        "shareProviders": [
+          "twitter",
+          "facebook"
         ]
       }
       </script>

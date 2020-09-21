@@ -18,21 +18,27 @@
         <h4 class="cooking_procedure">タイトル写真</h4>
         <div class="form_inner">
             <img id="preview">
-            <h3><input type="file" name="hd_img" id="hd_img"></h3>
+            <h3 class="title"><input type="file" name="hd_img" id="hd_img"></h3>
         </div>
 
         <h4 class="cooking_procedure">お買い物リスト</h4>
         <div class="form_inner">
-            @for ($i = 0; $i < 7; $i++)
-                <input type="text" name="ingredient_{{$i}}" value='{{ $ingredients->first()->{"ingredient_".$i} }}' class="ingredients">
+
+            @for ($i = 0; $i < count($ingredients); $i++)
+                <div class="form_each">
+                    <input type="text" name="ingredient_{{$i}}" class="ingredients" value='{{$ingredients[$i]->ingredient}}'>
+                    <input type="number" name="amount_{{$i}}" value='{{$ingredients[$i]->amount}}'  class="amount">
+                    {{Form::select('unit_{$i}', ['個', 'g', 'ml'], $ingredients[$i]->unit,['class'=>'units'])}}
+                </div>
             @endfor
         </div>
+
         
         <h4 class="cooking_procedure">作り方</h4>
         <div class="form_inner">
             <div class="recipe_blocks">
 
-            @for ($i = 0; $i < 5; $i++)
+            @for ($i = 0; $i < count($processes); $i++)
 
                 <div class="recipe_block" id="block_{{ $i }}">
                     <div class="desc">
@@ -64,10 +70,5 @@
     </form>
     </div>
     
-    <ul class="menu_fixed">
-        <a href="{{ url('/find') }}"><li><i class="fas fa-search"></i><span>検索する</span></li></a>
-        <a href="{{ url('/create') }}"><li><i class="far fa-plus-square"></i><span>投稿する</span></li></a>
-        <a href="{{ url('/saved') }}"><li><i class="far fa-bookmark"></i><span>お気に入り</span></li></a>
-    </ul>
 </div>
 @endsection

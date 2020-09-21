@@ -11,6 +11,11 @@ use App\Recipe;
 use App\Process;
 use App\Ingredient;
 use App\User;
+use App\Stocked_Recipe;
+use App\CookedRecipe;
+use App\Lesson;
+use App\CompletedLesson;
+
 use Validator;
 
 class ShareController extends Controller
@@ -45,33 +50,120 @@ class ShareController extends Controller
         $recipe_id = $recipes->id;
 
         for ($i = 0; $i < 5; $i++){
-            ${"processes".$i} = new Process();
-            ${"processes".$i}->text = $request->{"text_".$i};
-            ${"processes".$i}->recipe_id = $recipe_id;
-            ${"processes".$i}->sort = $request->{"sort_".$i};
-            if(!$request->file("image_".$i)==NULL){
-                Storage::delete('public/img/'.$request->{"image_".$i});
-                $file = $request->file("image_".$i);
-                // 画像のリサイズ
-                InterventionImage::make($file)->resize(1080, null, function ($constraint) {$constraint->aspectRatio();})->save();
-                $path = $file->store('public/img');
-                ${"processes".$i}->image = basename($path);
+            if(!$request->{"text_".$i}==NULL){
+                ${"processes".$i} = new Process();
+                ${"processes".$i}->text = $request->{"text_".$i};
+                ${"processes".$i}->recipe_id = $recipe_id;
+                ${"processes".$i}->sort = $request->{"sort_".$i};
+                if(!$request->file("image_".$i)==NULL){
+                    Storage::delete('public/img/'.$request->{"image_".$i});
+                    $file = $request->file("image_".$i);
+                    // 画像のリサイズ
+                    InterventionImage::make($file)->resize(1080, null, function ($constraint) {$constraint->aspectRatio();})->save();
+                    $path = $file->store('public/img');
+                    ${"processes".$i}->image = basename($path);
+                }
+                ${"processes".$i}->save();
             }
-            ${"processes".$i}->save();
         }
 
-        $ingredients = new Ingredient();
-        $ingredients->recipe_id = $recipe_id;
         for ($i = 0; $i < 7; $i++){
-        $ingredients->{"ingredient_".$i} = $request->{"ingredient_".$i};
+            if(!$request->{"ingredient_".$i}==NULL){
+                ${"ingredients".$i} = new Ingredient();
+                ${"ingredients".$i}->recipe_id = $recipe_id;
+                ${"ingredients".$i}->ingredient = $request->{"ingredient_".$i};
+                ${"ingredients".$i}->amount = $request->{"amount_".$i};
+                ${"ingredients".$i}->unit = $request->{"unit_".$i};
+                ${"ingredients".$i}->save();
+            }
         }
-        $ingredients->save();
+
+        $user = User::find($request->user_id);
+        $user->level += $request->level_up;
+        $user->save();
+
         return back();
     }
     
 
-    public function saved(){
-        return view('saved');
+    public function play(Recipe $recipe){
+        $processes = Process::where('recipe_id', $recipe->id)->orderBy('processes.sort', 'asc')->get();
+        return view('play', compact('recipe', 'processes'));
+    }
+
+    
+    public function stock(){
+        $records = Stocked_Recipe::where('stocked_recipes.user_id',Auth::user()->id)
+        ->join('recipes', 'recipes.id', '=', 'stocked_recipes.recipe_id')
+        ->get();
+
+        $stocked_recipes = Stocked_Recipe::where('stocked_recipes.user_id',Auth::user()->id)->get();
+        $recipe_ids = [];
+        foreach($stocked_recipes as $stocked_recipe){
+            array_push($recipe_ids, $stocked_recipe->recipe_id);
+        }        
+        $ingredients = Ingredient::whereIn('recipe_id', $recipe_ids)->get(['ingredient','amount','unit'])->groupBy('ingredient');
+        $ingredient_items = [];
+        foreach($ingredients as $ingredient){
+            $ingredient_item = [];
+            $item_amount_box = [];
+            foreach($ingredient as $item){
+            array_push($item_amount_box, $item->amount);
+            }
+            $item_amount = array_sum($item_amount_box);
+            array_push($ingredient_item, $ingredient[0]->ingredient, $item_amount, $ingredient[0]->unit);
+            array_push($ingredient_items, $ingredient_item);
+        }
+        return view('stock', compact('records', 'ingredient_items'));
+    }
+
+    public function add(Request $request){
+        $record = Stocked_Recipe::where('recipe_id',$request->recipe_id)->where('user_id',$request->user_id)->first();
+        // dd($record);
+        if($record==NULL){
+            $stocked_recipe = new Stocked_Recipe();
+            $stocked_recipe->user_id=$request->user_id;
+            $stocked_recipe->recipe_id=$request->recipe_id;
+            $stocked_recipe->save();
+        }
+        return redirect('stock');
+    }
+
+    public function remove(Request $request){
+        $remove = Stocked_Recipe::where('recipe_id',$request->recipe_id)->where('user_id',$request->user_id)->delete();
+        return redirect('stock');
+    }
+
+    public function stockdestroy(Request $request){
+        $destroy = Stocked_Recipe::where('user_id',$request->user_id)->delete();
+
+        foreach($request->recipe_ids as $recipe_id){
+            $cooked_recipe = new CookedRecipe();
+            $cooked_recipe->user_id = $request->user_id;
+            $cooked_recipe->recipe_id = $recipe_id;
+            $cooked_recipe->save();
+        }
+
+        // Lessonに該当するレシピがある場合、completed_lesson にデータを挿入
+        foreach($request->recipe_ids as $recipe_id){
+            $lesson = Lesson::where('recipe_id', $recipe_id)->first();
+            if(isset($lesson)){
+                $completed_lesson_data = CompletedLesson::where('course_id', $lesson->course_id)->where('lesson_id', $lesson->lesson_id)->where('user_id', $request->user_id)->first();
+                if(empty($completed_lesson_data)){
+                $completed_lesson = new CompletedLesson();
+                $completed_lesson->course_id = $lesson->course_id;
+                $completed_lesson->lesson_id = $lesson->lesson_id;
+                $completed_lesson->user_id = $request->user_id;
+                $completed_lesson->save();                
+                }   
+            }
+        }
+
+        $user = User::find($request->user_id);
+        $user->level += $request->level_up;
+        $user->save();
+
+        return redirect('stock');
     }
 
 
@@ -164,6 +256,8 @@ class ShareController extends Controller
             $process->delete();
             Storage::delete('public/img/'.$process->image);
         }
+        $stocked_recipe = Stocked_Recipe::where('recipe_id', $recipe->id)->delete();
+        $cooked_recipe = CookedRecipe::where('recipe_id', $recipe->id)->delete();
         $recipe->delete();
         return redirect('userpage/'.$recipe->user_id);
     }

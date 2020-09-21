@@ -110,26 +110,33 @@ $("#delete").on("click", function(){
     }
 });
 
+// 削除時のアラート stock.blade.php
+$("#stock_destroy").on("click", function(){
+    if(!confirm("今週の献立を削除してよろしいですか？（作成したレシピはマイページに保存されます）")){
+      return false;
+    }
+});
+
 // ユーザーページの切り替え （userpage.blade.php）
-$("#userpage_lesson").on("click", function(){
-  $("#userpage_lesson").removeClass("off");
-  $("#userpage_lesson").addClass("on");
+$("#userpage_cook").on("click", function(){
+  $("#userpage_cook").removeClass("off");
+  $("#userpage_cook").addClass("on");
   $("#userpage_recipe").removeClass("on");
   $("#userpage_recipe").addClass("off");
   $("#recipe_block").addClass("hidden");
   $("#recipe_block").addClass("hidden");
-  $("#lesson_block").removeClass("hidden");
-  $("#lesson_num").removeClass("hidden");
+  $("#cook_block").removeClass("hidden");
+  $("#cook_num").removeClass("hidden");
   $("#recipe_num").addClass("hidden");
 });
 
 $("#userpage_recipe").on("click", function(){
   $("#userpage_recipe").removeClass("off");
   $("#userpage_recipe").addClass("on");
-  $("#userpage_lesson").removeClass("on");
-  $("#userpage_lesson").addClass("off");
-  $("#lesson_block").addClass("hidden");
+  $("#userpage_cook").removeClass("on");
+  $("#userpage_cook").addClass("off");
+  $("#cook_block").addClass("hidden");
   $("#recipe_block").removeClass("hidden");
   $("#recipe_num").removeClass("hidden");
-  $("#lesson_num").addClass("hidden");
+  $("#cook_num").addClass("hidden");
 });

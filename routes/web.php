@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 // ページ一覧
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/saved', 'ShareController@saved');
+    // 献立の作成
+    Route::get('/stock', 'ShareController@stock');
+    Route::post('/stock/add', 'ShareController@add');
+    Route::post('/stock/remove', 'ShareController@remove');
+    Route::post('/stock/destroy', 'ShareController@stockdestroy');
+
     Route::get('/create', 'ShareController@create');
     
     Route::get('/userpage/{user}', 'UsersController@userpage');
@@ -26,6 +31,9 @@ Route::get('/recipe/{recipe}', 'ShareController@detail');
 // レシピの検索
 Route::resource('/index', 'ShareController');
 
+// レシピ手順の表示
+Route::get('/recipe/{recipe}/play', 'ShareController@play');
+
 // レシピの追加
 Route::post('/store', 'ShareController@store');
 
@@ -39,9 +47,9 @@ Auth::routes();
 Route::get('/', 'CookingController@home');
 Route::get('/overview', 'CookingController@overview');
 Route::get('/course/{course}', 'CookingController@course');
-Route::get('/course/{course}/lesson/{lesson}', 'CookingController@lesson');
-Route::post('/lesson/complete', 'CookingController@complete');
 Route::get('/course/{course}/lesson/{lesson}/play', 'CookingController@play');
 
 // このページは現在しようしていない（ファイルは残したまま）
 // Route::get('/list', 'ShareController@list');
+// Route::get('/course/{course}/lesson/{lesson}', 'CookingController@lesson');
+// Route::post('/lesson/complete', 'CookingController@complete');

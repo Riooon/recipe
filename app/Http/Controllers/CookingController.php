@@ -77,6 +77,10 @@ class CookingController extends Controller
     }
 
 
+
+    
+    // 以下のページは現在使用していない（過去に作って、再度使うときのためにとっておく）
+
     public function lesson($course, $lesson){
         $course_items=Course::where('english',$course)->first();
         $lesson_items=Lesson::where('course_id', $course_items->id)->where('lesson_id', $lesson)->first();
