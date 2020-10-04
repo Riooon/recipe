@@ -24,15 +24,21 @@
     <div class="latest_recipes">
         <p class="category_bar">新着レシピ一覧</p>
         @foreach ($recipes as $recipe)
+            <a href="{{ url('recipe/'.$recipe->id) }}">
             <div class="recipe_card">
-                <a href="{{ url('recipe/'.$recipe->id) }}"><img src="{{ asset('storage/img/'.$recipe->hd_img), true }}" alt onerror="this.onerror"></a>
+                <img src="{{ asset('storage/img/'.$recipe->hd_img), true }}" alt onerror="this.onerror">
                 <div class="recipe_titles">
-                    <a href="{{ url('recipe/'.$recipe->id) }}"><h4>{{ $recipe->title }}</h4></a>
+                    <h4>{{ $recipe->title }}</h4>
                     <p class="gray">posted by</p><br>
                     <p>{{ $recipe->name }}</p>
                 </div>
             </div>
+            </a>
         @endforeach
+
+        <div class="pagination">
+        {{ $recipes->links() }}
+        </div>
     </div>
 
 </div>

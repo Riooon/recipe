@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/recipe/update', 'ShareController@update');
  });
 
+
 Route::get('/find', 'ShareController@find');
 Route::get('/result', 'ShareController@result');
 Route::get('/recipe/{recipe}', 'ShareController@detail');
@@ -53,3 +54,4 @@ Route::get('/course/{course}/lesson/{lesson}/play', 'CookingController@play');
 // Route::get('/list', 'ShareController@list');
 // Route::get('/course/{course}/lesson/{lesson}', 'CookingController@lesson');
 // Route::post('/lesson/complete', 'CookingController@complete');
+

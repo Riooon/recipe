@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Okome Mode</title>
+    <title>OKOME MODE｜初心者向けレシピアプリ</title>
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,7 +16,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <!-- Styles -->
@@ -26,10 +26,10 @@
     <meta property="og:locale" content="ja_JP">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{$recipe->title}}">
-    <meta property="og:description" content="Okome Modeでシェアされた料理のご紹介です。楽しみながら、ステップバイステップで料理を学びましょう！">
+    <meta property="og:description" content="OKOME MODEでシェアされた料理のご紹介です。楽しみながら、ステップバイステップで料理を学びましょう！">
     <meta property="og:url" content="https://okomemode.com/recipe/{{$recipe->id}}">
     <meta property="og:image" content="http://okomemode.com/storage/img/{{$recipe->hd_img}}">
-    <meta property="og:site_title" content="Okome Mode">
+    <meta property="og:site_title" content="OKOME MODE">
 
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:site" content="@okome_mode"/>
@@ -41,7 +41,7 @@
     <header>
             <a href="{{ url('/') }}"><img src="{{asset('img/logo_big.png')}}" alt=""></a>
             <button class="btn_menu"><i class="fas fa-bars"></i></button>
-            <nav>
+            <nav class="header_right">
                 <ul class="menu_list">
                     @guest
                     <li><a href="{{ url('/find') }}">レシピを探す</a></li>
@@ -59,6 +59,9 @@
 
         <main>
             <div class="recipe_inner">
+                <div class="recipe_back">
+                    <a href="javascript:history.back();"><i class="fas fa-arrow-left"></i></a>
+                </div>
                 <div class="recipe_heaader" style="background-image: url('{{ asset('storage/img/'.$recipe->hd_img), true }}');">
                     <h1>{{ $recipe->title }}</h1>
                     <a href="{{ url('/recipe/'.$recipe->id.'/play') }}"><i class="far fa-play-circle"></i><span> 手順を再生</span></a>

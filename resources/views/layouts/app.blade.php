@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Okome Mode</title>
+    <title>OKOME MODE｜初心者向けレシピアプリ</title>
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,7 +16,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <!-- Styles -->
@@ -25,11 +25,11 @@
 
     <meta property="og:locale" content="ja_JP">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="Okome Modeでは実際に料理を作りながら、ステップバイステップで料理を学んでいくことができます。楽しみながら料理を学びましょう！">
-    <meta property="og:title" content="Okome Mode｜初心者向けレシピアプリ">
+    <meta property="og:description" content="OKOME MODEでは実際に料理を作りながら、ステップバイステップで料理を学んでいくことができます。楽しみながら料理を学びましょう！">
+    <meta property="og:title" content="OKOME MODE｜初心者向けレシピアプリ">
     <meta property="og:url" content="https://okomemode.com">
     <meta property="og:image" content="http://okomemode.com/img/main_image.jpg">
-    <meta property="og:site_title" content="Okome Mode">
+    <meta property="og:site_title" content="OKOME MODE">
     
 </head>
 
@@ -39,7 +39,7 @@
         <header>
             <a href="{{ url('/overview') }}"><img src="{{asset('img/logo_big.png')}}" alt=""></a>
             <button class="btn_menu"><i class="fas fa-bars"></i></button>
-            <nav>
+            <nav class="header_right">
                 <ul class="menu_list">
                 @guest
                 <li><a href="{{ url('/find') }}">レシピを探す</a></li>

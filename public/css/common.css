@@ -2,15 +2,8 @@
 body {
     max-width: 720px;
     margin: 0 auto;
+    min-height: 100vh;
 }
-
-@media(min-width:720px){
-    body {
-        border: 1px solid #80808033;
-        height: 100vh;
-    }
-}
-
 
 progress {
   -webkit-appearance: none;
@@ -83,7 +76,7 @@ header img {
     cursor: pointer;
     line-height: 1;
 }
-nav {
+.header_right {
     background: #c8bd00;
     position: absolute;
     z-index: 1;
@@ -94,7 +87,7 @@ nav {
     width: 0%;
     transition: .5s;
 }
-nav.open-menu {
+.header_right.open-menu {
     width: 100%;
 }
 
@@ -102,21 +95,21 @@ nav.open-menu {
 .gray {color: gray;}
 .tomato {color: tomato;}
 
-.pagenation {
-    padding: 10px 0 30px;
+.pagination {
+    padding: 10px 0 12px;
     text-align: center;
 }
-.pagenation ul{
+.pagination ul{
     display: flex;
     justify-content: center;
 }
-.pagenation li {
+.pagination li {
     color: gray;
     margin: 0 10px 0;
     font-size: 17px;
     font-weight: bold;
 }
-.pagenation li a{
+.pagination li a{
     color: #c8bd00;
 }
 
@@ -189,7 +182,7 @@ nav.open-menu {
     line-height: 20px;
     margin: 0 auto;
     display: inline-block;
-    padding: 20px 0 0;
+    padding: 20px 10px 0;
 }
 .validation_error .message {
     padding: 20px 0;
@@ -282,7 +275,7 @@ nav.open-menu {
     background-image: url("../img/main_image.jpg");
     background-color:rgba(0,0,0,0.15);
     background-blend-mode:darken;
-    background-position: 0 0;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -306,16 +299,25 @@ nav.open-menu {
     font-size: 18px;
     font-weight: bold;
 }
-.find_by_recipe .title {
-    border-bottom: 1px solid black;
-    padding: 0 0 10px;
+.form_img_label {
+    margin: 0 0 30px;
+}
+#form_img_label {
+    color: #c8bd00;
+    background-color: white;
+    padding: 6px;
+    border-radius: 13px;
+    border: 1px solid #c8bd00;
 }
 .find_by_recipe ul {
-    margin: 20px 0 0;
+    padding: 20px 0 0;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     justify-content: space-evenly;
+    background-image: url(../img/white_bg.jpg);
+    background-color: rgba(255,255,255,0.5);
+    background-blend-mode: lighten;
 }
 .find_by_recipe input {
     border: none;
@@ -336,21 +338,29 @@ nav.open-menu {
     background-image: url('../img/pasta.jpg');
     background-color:rgba(255,255,255,0.2);
     background-blend-mode:lighten;
+    font-size: 17px;
+    text-shadow: 0.5px 0.5px 0 #808080, -0.5px 0.5px 0 #808080, 0.5px -0.5px 0 #808080, -0.5px -0.5px 0 #808080;
 }
 .find_by_recipe .don {
     background-image: url('../img/don.jpg');
     background-color:rgba(255,255,255,0.2);
     background-blend-mode:lighten;
+    font-size: 17px;
+    text-shadow: 0.5px 0.5px 0 #808080, -0.5px 0.5px 0 #808080, 0.5px -0.5px 0 #808080, -0.5px -0.5px 0 #808080;
 }
 .find_by_recipe .curry {
     background-image: url('../img/curry.jpg');
     background-color:rgba(255,255,255,0.2);
     background-blend-mode:lighten;
+    font-size: 17px;
+    text-shadow: 0.5px 0.5px 0 #808080, -0.5px 0.5px 0 #808080, 0.5px -0.5px 0 #808080, -0.5px -0.5px 0 #808080;
 }
 .find_by_recipe .salada {
     background-image: url('../img/salada.jpg');
     background-color:rgba(255,255,255,0.2);
     background-blend-mode:lighten;
+    font-size: 17px;
+    text-shadow: 0.5px 0.5px 0 #808080, -0.5px 0.5px 0 #808080, 0.5px -0.5px 0 #808080, -0.5px -0.5px 0 #808080;
 }
 
 .category_bar {
@@ -366,6 +376,7 @@ nav.open-menu {
     display: flex;
     padding: 15px 10px 15px;
     border-bottom: 1px solid #80808033;
+    align-items: center;
 }
 .recipe_card:first-child {
     border-top: 1px solid #80808033;
@@ -377,7 +388,7 @@ nav.open-menu {
     border-radius: 10px;
 }
 .recipe_titles {
-    margin: 20px;
+    margin: 0 20px;
 }
 .recipe_card h4 {
     font-size: 18px;
@@ -431,7 +442,7 @@ nav.open-menu {
     font-weight: bold;
 }
 .user_inputs {
-    margin: 40px 0 0;
+    margin: 40px 0 30px;
 }
 .user_inputs dl {
     width: 75%;
@@ -455,7 +466,7 @@ nav.open-menu {
 .user_inputs .submit {
     width: 80%;
     padding: 12px 10px;
-    margin: 0 10%;
+    margin: 20px 10%;
     border-radius: 30px;
     border: none;
     font-size: 15px;
@@ -468,7 +479,7 @@ nav.open-menu {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 30px 0;
+    margin: 0 0 30px;
 }
 .wdithdraws .btn {
     text-decoration: underline;
@@ -526,7 +537,7 @@ nav.open-menu {
 }
 .form_inner {
     margin: 20px 0;
-    padding: 0 12.5%;
+    padding: 0 20px;
     text-align: center;
 }
 .form_each {
@@ -555,6 +566,7 @@ nav.open-menu {
     max-height: 200px;
     object-fit: cover;
     border-radius: 3px;
+    margin: 0 0 30px;
 }
 #hd_img {
     padding: 10px 0;
@@ -620,7 +632,7 @@ input#file-upload-button {
     font-size: 25px
 }
 .recipe_block .updown i {
-    padding: 10px;
+    padding: 10px 0 10px 10px;
     color: #c8bd00;
 }
 .recipe_block .desc {
@@ -631,6 +643,7 @@ input#file-upload-button {
     max-height: 200px;
     object-fit: cover;
     border-radius: 3px;
+    margin: 0 0 30px;
 }
 .recipe_block .desc textarea {
     border: none;
@@ -648,6 +661,11 @@ input#file-upload-button {
     font-weight: bold;
 }
 /* detail.blade.php レシピ詳細を表示する画面 ーーーーーーーーーーーーーーーー  */
+.recipe_back i {
+    font-size: 23px;
+    padding: 8px 0 8px 15px;
+    color: #c8bd00;
+}
 .recipe_heaader {
     background-size: cover;
     background-repeat: no-repeat;
@@ -773,17 +791,20 @@ input#file-upload-button {
     font-weight: bold;
 }
 .stock_else {
-    padding: 20px 10px;
+    padding: 20px 0;
     font-size: 15px;
     color: gray;
+    text-align: center;
+}
+
+/* useredit.blade.php */
+.icon_label {
+    margin: 0 0 20px;
 }
 
 /* クッキングアプリ ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー*/
 
 /* overview.blade.php ーーーーーーーーーーーーーーーー*/
-.overview_inner {
-    margin: 20px 10px;
-}
 .overview_top {
     background-image: url('../img/main_image.jpg');
     background-position: center;
@@ -797,55 +818,83 @@ input#file-upload-button {
     align-items: center;
     color: white;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 28px;
+}
+.overview_inner {
+    padding: 0 0 10px;
 }
 .overview_inner .user_info img {
-    width: 100px;
-    height: 95px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
     border-radius: 50%;
 }
 .overview_inner .user_info {
     display: flex;
-    flex-direction: column;
     align-items: center;
     padding: 20px 0 20px;
     margin: 0 0 10px;
     border-radius: 10px;
-    border: 1px solid #c8bd0070;
+    justify-content: space-evenly;
 }
 .overview_inner .user_info .texts {
     display: flex;
-    margin: 10px 0 0;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
     justify-content: space-evenly;
     height: 70px;
 }
 .overview_inner .user_info .texts h4 {
     font-weight: bold;
+    padding: 0 0 5px;
+    text-decoration: underline;
 }
 .overview_inner .user_info .texts p {
     color: gray;
+    font-size: 14px;
 }
-.overview_title {
-    display: flex;
-    font-weight: bold;
-    font-size: 18px;
-    color: #c8bd00;
-    margin: 15px 0;
-}
-.overview_title h2 {
-    margin: 0 5px;
-}
+
+.user_level {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+  }
+::-webkit-.user_level-value {
+      background-color:black;
+      border-radius: 8px;
+    }
+  ::-webkit-progress-bar {
+    background-color: #80808033;
+    border-radius: 8px;
+    height: 13px;
+    width: 150px;
+    margin: 10px 0 0;
+  }
+  ::-moz-progress-value {
+      background-color: #c8bd00;
+      border-radius: 8px;
+  }
+  ::-moz-progress-bar {
+      background-color: #80808033;
+      border-radius: 8px;
+      height: 13px;
+      width: 150px;
+      margin: 10px 0 0;
+  }
+
+
 .course_card {
     padding: 20px 0;
     margin: 10px;
     border-radius: 6px;
-    border: 1px solid #cccccc;
-    box-shadow: 0 0 6px 1px #c8bd003b;
     display: flex;
+    box-shadow: 0 0 4px 1px #cccccc;
+    background-image: url('../img/white_bg.jpg');
+    background-color:rgba(255,255,255,0.5);
+    background-blend-mode:lighten;
+}
+.course_card:last-child {
+    margin: 10px 10px 0;
 }
 .course_card .left img {
     width: 110px;
@@ -969,4 +1018,107 @@ input#file-upload-button {
     padding: 15px 50px;
     font-size: 15px;
     font-weight: bold;
+}
+
+
+/* PC用レイアウトーーーーーーーーーーーーーーーーーーーーーーー */
+
+@media(min-width:720px){
+    body {
+        border-left: 1px solid #80808033;
+        border-right: 1px solid #80808033;
+    }
+    header {
+        height: 40px;
+    }
+    header img {
+        width: 230px;
+    }
+    nav {
+        top: 66px;
+    }
+
+    /* overview.blade.php */
+    .overview_inner .user_info {
+        justify-content: center;
+    }
+    .overview_inner .user_info img {
+        margin: 0 30px;
+    }
+
+    /* course.blade.php */
+    .course_title {
+        height: 300px;
+    }
+    .lesson_card img {
+        height: 300px;
+    }
+
+    /* detail.blade.php */
+    .recipe_heaader {
+        height: 320px;
+    }
+    .recipe_back i {
+        font-size: 25px;
+        padding: 10px 0 10px 15px;
+    }
+    .shopping_list ul {
+        padding: 20px;
+    }
+    .recipe_prosess {
+        padding: 25px 12px;
+    }
+    .recipe_heaader h1 {
+        font-size: 30px;
+    }
+    .recipe_heaader a span {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+    .recipe_heaader a i {
+        font-size: 35px;
+    }
+
+    /* find.blade.php */
+    .main_image {
+        height: 300px;
+    }
+    .find_by_recipe ul {
+        padding: 40px 0 20px;
+    }
+    .find_by_recipe input {
+        height: 200px;
+        border-radius: 3px;
+    }
+    .serch_bar .keyword {
+        width: 250px;
+    }
+    .stock_btn {
+        font-size: 16px;
+        padding: 0.4em 2em;
+    }
+
+    /* stock.blade.php */
+    .recipe_horizontal_card {
+        padding: 30px 0;
+    }
+    .recipe_horizontal_card .right {
+        flex-direction: row;
+        align-items: center;
+    }
+    .recipe_horizontal_card .right * {
+        padding: 5px 15px;
+    }
+    .recipe_horizontal_card .right h3 {
+        font-size: 18px;
+    }
+
+    /* create.blade.php */
+    .form_inner {
+        margin: 30px auto;
+        width: 70%;
+    }
+    textarea {
+        font-size: 17px;
+    }
 }

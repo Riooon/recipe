@@ -5,6 +5,6 @@
         <li>{{ $error }}</li>
     @endforeach
     </ul>
-    <h2 class="message">入力内容に不足があります。</h2>
+    <h2 class="message">レシピの修正が必要です</h2>
 </div>
 @endif

@@ -15,6 +15,7 @@ use App\Stocked_Recipe;
 use App\CookedRecipe;
 use App\Lesson;
 use App\CompletedLesson;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use Validator;
 
@@ -26,6 +27,24 @@ class ShareController extends Controller
             'title' => 'required',
             'hd_img' => 'required',
             'ingredient_0' => 'required',
+            'text_0' => 'required',
+            'hd_img' => 'max:2560',
+            'image_0' => 'max:1240',
+            'image_1' => 'max:1240',
+            'image_2' => 'max:1240',
+            'image_3' => 'max:1240',
+            'image_4' => 'max:1240',
+        ],[
+            'title.required' => 'レシピタイトルが未入力です',
+            'hd_img.required' => 'タイトル写真が選択されていません',
+            'ingredient_0.required' => '材料を最低一つ登録しましょう',
+            'text_0.required' => '作り方を最低一つ登録しましょう',
+            'hd_img.max' => '画像サイズが大きすぎます（アップロードできるタイトル画像は最大2.5MBです）',
+            'image_0.max' => '画像サイズが大きすぎます（アップロードできるレシピ画像は最大1MBです）',
+            'image_1.max' => '画像サイズが大きすぎます（アップロードできるレシピ画像は最大1MBです）',
+            'image_2.max' => '画像サイズが大きすぎます（アップロードできるレシピ画像は最大1MBです）',
+            'image_3.max' => '画像サイズが大きすぎます（アップロードできるレシピ画像は最大1MBです）',
+            'image_4.max' => '画像サイズが大きすぎます（アップロードできるレシピ画像は最大1MBです）',
         ]);
         //バリデーション:エラー 
         if ($validator->fails()) {
@@ -171,7 +190,7 @@ class ShareController extends Controller
         $recipes = Recipe::join('users', 'recipes.user_id', '=', 'users.id')
         ->orderBy('recipes.created_at', 'desc')
         ->select('recipes.id', 'recipes.title', 'recipes.hd_img', 'users.name')
-        ->take(8)->get();
+        ->paginate(5);
         return view('find', compact('recipes'));
     }
 
@@ -274,7 +293,7 @@ class ShareController extends Controller
         $query->where('title','like','%'.$keyword.'%');
     }
     #ページネーション
-    $recipes = $query->orderBy('created_at','desc')->paginate(10);
+    $recipes = $query->join('users', 'recipes.user_id', '=', 'users.id')->orderBy('recipes.created_at','desc')->paginate(5);
     return view('result', compact('recipes', 'keyword'));
     }
 
@@ -283,7 +302,7 @@ class ShareController extends Controller
         $recipes = Recipe::join('users', 'recipes.user_id', '=', 'users.id')
         ->orderBy('recipes.created_at', 'desc')
         ->select('recipes.id', 'recipes.title', 'recipes.hd_img', 'recipes.user_id', 'users.name')
-        ->paginate(10);
+        ->paginate(5);
         return view('list',compact('recipes'));
     }
 }

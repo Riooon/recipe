@@ -16,10 +16,8 @@
             </div>
 
             <h4 class="cooking_procedure">タイトル写真</h4>
-            <div class="form_inner">
                 <img id="preview">
-                <h3 class="title"><input id="hd_img" type="file" name="hd_img"></h3>                
-            </div>
+                <h3 class="form_img_label"><label id="form_img_label" for="hd_img">写真を選択<input id="hd_img" type="file" name="hd_img" style="display:none;"></label></h3>
 
             <h4 class="cooking_procedure">お買い物リスト</h4>
             <div class="form_inner">
@@ -41,22 +39,22 @@
             <div class="form_inner">
                 <div class="recipe_blocks">
 
-                @for ($i = 0; $i < 5; $i++)
+                    @for ($i = 0; $i < 5; $i++)
 
-                    <div class="recipe_block" id="block_{{ $i }}">
-                        <div class="desc">
-                            <img id="preview_{{ $i }}" class="previews">
-                            <input type="file" name="image_{{ $i }}" id="image_{{ $i }}">
-                            <h3 class="text"><textarea name="text_{{ $i }}" id="" placeholder="手順{{$i+1}}"></textarea></h3>
+                        <div class="recipe_block" id="block_{{ $i }}">
+                            <div class="desc">
+                                <img id="preview_{{ $i }}" class="previews">
+                                <h3 class="form_img_label"><label id="form_img_label" for="image_{{ $i }}">写真を選択<input style="display:none;" type="file" name="image_{{ $i }}" id="image_{{ $i }}"></label></h3>
+                                <h3 class="text"><textarea name="text_{{ $i }}" id="" placeholder="手順{{$i+1}}"></textarea></h3>
+                            </div>
+                            <div class="updown">
+                                <i class="fas fa-arrow-circle-up" id="block{{ $i }}_up"></i>
+                                <i class="fas fa-arrow-circle-down" id="block{{ $i }}_down"></i>
+                            </div>
+                            <input type="hidden" name="sort_{{ $i }}" id="sort_{{ $i }}" value="">
                         </div>
-                        <div class="updown">
-                            <i class="fas fa-arrow-circle-up" id="block{{ $i }}_up"></i>
-                            <i class="fas fa-arrow-circle-down" id="block{{ $i }}_down"></i>
-                        </div>
-                        <input type="hidden" name="sort_{{ $i }}" id="sort_{{ $i }}" value="">
-                    </div>
-                    
-                @endfor
+                        
+                    @endfor
 
                 </div>
                 
@@ -65,6 +63,7 @@
                 <button type="button" id="recipe_submit">送信</button>
 
             </div>
+            
         </form>
 
     </div>

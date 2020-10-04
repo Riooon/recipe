@@ -13,14 +13,10 @@
             <div class="texts">
                 <h4>{{ Auth::user()->name }}</h4>
                 <p>Lv.{{ floor(Auth::user()->level) }}</p>
-                <progress max="1" value="{{ Auth::user()->level - floor(Auth::user()->level) }}">{{ Auth::user()->level - floor(Auth::user()->level) }}%</progress>
+                <progress id="user_level" max="1" value="{{ Auth::user()->level - floor(Auth::user()->level) }}">{{ Auth::user()->level - floor(Auth::user()->level) }}%</progress>
             </div>
         </div>
         @endauth
-        <div class="overview_title">
-            <i class="fas fa-list-alt"></i>
-            <h2>コース一覧</h2>
-        </div>
 
         <ul>
         @foreach($course_blocks as $course_block)
