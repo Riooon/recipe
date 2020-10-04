@@ -293,7 +293,10 @@ class ShareController extends Controller
         $query->where('title','like','%'.$keyword.'%');
     }
     #ページネーション
-    $recipes = $query->join('users', 'recipes.user_id', '=', 'users.id')->orderBy('recipes.created_at','desc')->paginate(5);
+    $recipes = $query->join('users', 'recipes.user_id', '=', 'users.id')
+    ->orderBy('recipes.created_at','desc')
+    ->select('recipes.id', 'recipes.title', 'recipes.hd_img', 'recipes.user_id', 'users.name')
+    ->paginate(5);
     return view('result', compact('recipes', 'keyword'));
     }
 

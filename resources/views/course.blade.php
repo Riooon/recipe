@@ -2,7 +2,9 @@
 @section('content')
 
 <div class="recipe_inner">
-
+    <div class="recipe_back">
+        <a href="javascript:history.back();"><i class="fas fa-arrow-left"></i></a>
+    </div>
     <div class="course_title" style="background-image: url('{{ asset('img/'.$course_items->image ) }}'); ">
         <h1>{{ $course_items->name }} コース</h1>
         <p>達成率 {{ $achieved_rate }} %</p>

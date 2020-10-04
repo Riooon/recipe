@@ -6,6 +6,9 @@
 <!-- バリデーションエラーの表示に使用-->
 
 <div class="recipe_inner">
+    <div class="recipe_back">
+        <a href="javascript:history.back();"><i class="fas fa-arrow-left"></i></a>
+    </div>
     @if (count($recipes) > 0)
     <p class="category_bar">検索結果</p>
     @foreach ($recipes as $recipe)
