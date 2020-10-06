@@ -20,8 +20,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('recipe','ExportController@recipe');
 Route::get('recipe/{recipe}','ExportController@recipe_item');
-
-Route::get('history/{user}','ExportController@history');
-
-// APIで画像を送信したい
-Route::get('image','ExportController@image');

@@ -10,53 +10,32 @@ use Illuminate\Http\Request;
 
 class ExportController extends Controller
 {
-    //
     public function recipe(){
-      $recipes_origins = Recipe::all();
-      // dd($recipes_origins);
+      $recipe_origins = Recipe::all();
       $recipes = array();
-      $recipe = array();
-      foreach($recipes_origins as $recipes_origin){
-        $hd_img = $hd_img = 'https://okomemode.com/storage/img/'.$recipes_origin->hd_img;
-        $recipe += array('id'=>$recipes_origin->id);
-        $recipe += array('hd_img'=>$hd_img);
-        $recipe += array('title'=>$recipes_origin->title);
-        $recipe += array('user_id'=>$recipes_origin->user_id);
-        $recipe += array('created_at'=>Carbon::createFromFormat('Y-m-d H:i:s', $recipes_origin->created_at)->format('Y/m/d h:i:s'));
+      foreach ($recipe_origins as $recipe_origin){
+        $recipe = [
+          "id" => $recipe_origin->id,
+          "title" => $recipe_origin->title,
+          "hd_img" => 'https://okomemode.com/storage/img/'.$recipe_origin->hd_img,
+          "user_id" => $recipe_origin->user_id,
+          "created_at" => Carbon::createFromFormat('Y-m-d H:i:s', $recipe_origin->created_at)->format('Y/m/d h:i:s'),
+          "updated_at" => Carbon::createFromFormat('Y-m-d H:i:s', $recipe_origin->updated_at)->format('Y/m/d h:i:s'),
+          ];
         array_push($recipes, $recipe);
       }
       return $recipes;
     }
 
-    // APIで画像を受け取りたい ↑に統合できたはず！まだテストできてない
-    public function image(){
-      $recipes = Recipe::all();
-      foreach($recipes as $recipe){
-        $hd_img = 'https://okomemode.com/storage/img/'.$recipe->hd_img;
-      }
-      return $hd_img;
-    }
-
-
     public function recipe_item(Recipe $recipe){
-      return $recipe;
-    }
-
-    public function history($user){
-      $histories = array();
-      $cooked_recipes = CookedRecipe::where('user_id', $user)->get();
-      foreach ($cooked_recipes as $cooked_recipe){
-        $history = array();
-        $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $cooked_recipe->created_at)->format('Y/m/d h:i:s');
-        $recipe = Recipe::where('id', $cooked_recipe->recipe_id)->value('title');
-        array_push($history, $created_at, $recipe);
-        $ingredients = Ingredient::where('recipe_id', $cooked_recipe->recipe_id)->get()->pluck('ingredient');
-        
-        foreach($ingredients as $ingredient){
-          array_push($history, $ingredient);
-        }
-        array_push($histories, $history);
-      }
-      return $histories;
+      $recipe_return = [
+        "id" => $recipe->id,
+        "title" => $recipe->title,
+        "hd_img" => 'https://okomemode.com/storage/img/'.$recipe->hd_img,
+        "user_id" => $recipe->user_id,
+        "created_at" => Carbon::createFromFormat('Y-m-d H:i:s', $recipe->created_at)->format('Y/m/d h:i:s'),
+        "updated_at" => Carbon::createFromFormat('Y-m-d H:i:s', $recipe->updated_at)->format('Y/m/d h:i:s'),
+      ];
+      return $recipe_return;
     }
 }

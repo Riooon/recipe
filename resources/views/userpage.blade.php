@@ -35,6 +35,7 @@
                     </div>
                 </div>
             @endforeach
+
         </div>
         <div id="cook_block">
         @foreach ($cooked_recipes as $cooked_recipe)
@@ -49,6 +50,7 @@
                 </div>
             </div>
         @endforeach
+        
         </div>
     </div>
 </div>
