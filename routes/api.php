@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('recipe','ExportController@recipe');
 Route::get('recipe/{recipe}','ExportController@recipe_item');
+
+Route::get('courses','ExportController@courses');
+Route::get('course/{course}','ExportController@course');
