@@ -20,3 +20,18 @@ Route::get('recipe/{recipe}','ExportController@recipe_item');
 
 Route::get('courses','ExportController@courses');
 Route::get('course/{course}','ExportController@course');
+
+Route::group([
+    'prefix' => 'auth'
+], function () {
+    Route::post('login', 'AuthController@login');
+});
+
+Route::group([
+    'prefix' => 'auth',
+    'middleware' => 'auth:api'
+], function () {
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+});
