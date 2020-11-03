@@ -60,7 +60,7 @@
             <div class="text_block">
                 <h1>楽しみながら料理を学ぼう！</h1>
                 <h4>Okome Modeでは実際に料理を作りながら、ステップバイステップで料理を学んでいくことができます。</h4>
-                <a href="{{ url('/overview') }}">今すぐ始める</a>
+                <a href="{{ url('/find') }}">今すぐ始める</a>
             </div>
         </div>
 

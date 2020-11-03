@@ -141,7 +141,7 @@ $("#userpage_recipe").on("click", function(){
   $("#cook_num").addClass("hidden");
 });
 
-// 完了/未完了表示の切り替え
+// 完了/未完了表示の切り替え（PC）
 $(".lesson_card_bg").mouseover(function(){
   $(".lesson_card_bg h4").removeClass("display_none");
   $(".lesson_card_bg").addClass("bg_darken");
@@ -150,11 +150,13 @@ $(".lesson_card_bg").mouseleave(function(){
   $(".lesson_card_bg h4").addClass("display_none");
   $(".lesson_card_bg").removeClass("bg_darken");
 })
-$(".lesson_card_bg").touchstart(function(){
+
+// 完了/未完了表示の切り替え（スマホ）
+$(".lesson_card_bg").on("touchstart", function(){
   $(".lesson_card_bg h4").removeClass("display_none");
   $(".lesson_card_bg").addClass("bg_darken");
 })
-$(".lesson_card_bg").touchend(function(){
+$(".lesson_card_bg").on("touchend", function(){
   $(".lesson_card_bg h4").addClass("display_none");
   $(".lesson_card_bg").removeClass("bg_darken");
 })
