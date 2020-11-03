@@ -34,7 +34,6 @@ progress {
 }
 
 
-
 /* ヘッダー */
 header {
     background: white;
@@ -955,13 +954,6 @@ input#file-upload-button {
 .lesson_card * {
     margin: 0 0 20px;
 }
-.lesson_card h4 {
-    display: inline-block;
-    padding: 5px;
-    font-size: 15px;
-    border: 1px solid rgb(216, 213, 213);
-    border-radius: 20px;
-}
 .lesson_card h2 {
     font-size: 22px;
     font-weight: bold;
@@ -970,11 +962,30 @@ input#file-upload-button {
     color: #444444;
     line-height: 1.5;
 }
-.lesson_card img {
+.lesson_card_bg {
     width: 100%;
     opacity: 0.9;
     height: 200px;
     object-fit: cover;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+}
+.lesson_card_bg h4 {
+    padding: 5px;
+    font-size: 23px;
+    position: absolute;
+    top: 40%;
+    left: 25%;
+}
+.display_none {
+    display: none;
+}
+.bg_darken {
+    background-color:rgba(0,0,0,0.5);
+    background-blend-mode:darken;
 }
 .lesson_card .btn {
     display: block;
@@ -989,7 +1000,7 @@ input#file-upload-button {
     font-weight: bold;
 }
 .lesson_card .uncompleted {
-    color: orange;
+    color: white;
     font-weight: bold;
 }
 
@@ -1051,8 +1062,13 @@ input#file-upload-button {
     .course_title {
         height: 300px;
     }
-    .lesson_card img {
+    .lesson_card_bg {
         height: 300px;
+    }
+    .lesson_card h4 {
+        top: 42%;
+        left: 30%;
+        font-size: 30px;
     }
 
     /* detail.blade.php */

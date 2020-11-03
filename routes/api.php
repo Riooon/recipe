@@ -18,8 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('recipe','ExportController@recipe');
 Route::get('recipe/{recipe}','ExportController@recipe_item');
 
-Route::get('courses','ExportController@courses');
-Route::get('course/{course}','ExportController@course');
+Route::get('courses/{user}','ExportController@courses');
+Route::get('course/{course}/{user}','ExportController@course');
+
+Route::get('/stock/{user}', 'ExportController@stock');
+Route::post('/add_stock', 'ExportController@add_stock');
+Route::post('/remove_stock', 'ExportController@remove_stock');
+Route::post('/destroy_stock', 'ExportController@destroy_stock');
+
+
 
 Route::group([
     'prefix' => 'auth'

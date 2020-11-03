@@ -17,12 +17,13 @@
         @for ($i = 0; $i < count($lesson_block); $i++)
 
             <div class="lesson_card">
-                @if(!$lesson_block[$i][1]==NULL)
-                    <h4 class="completed">レッスン終了！</h4>
-                @else
-                    <h4 class="uncompleted">レッスン未完了</h4>
-                @endif
-                <img src="{{ asset('img/'.$lesson_block[$i][0]->hd_img) }}" alt="">
+                <div class="lesson_card_bg" style="background-image: url('{{ asset('img/'.$lesson_block[$i][0]->hd_img) }}');">
+                    @if(!$lesson_block[$i][1]==NULL)
+                        <h4 class="completed display_none">レッスン終了！</h4>
+                    @else
+                        <h4 class="uncompleted display_none">レッスン未完了</h4>
+                    @endif
+                </div>
                 <h2 class="title">{{ $lesson_block[$i][0]->name }}</h2>
                 <p>{{ $lesson_block[$i][0]->desc }}</p>
                 <a href="{{ url('recipe/'.$lesson_block[$i][0]->recipe_id) }}" class="btn" style="background: {{$course_items->color}}">レッスン開始！</a>

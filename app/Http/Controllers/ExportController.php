@@ -6,6 +6,7 @@ use App\User;
 use App\Recipe;
 use App\Ingredient;
 use App\CookedRecipe;
+use App\Stocked_Recipe;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Course;
@@ -85,7 +86,7 @@ class ExportController extends Controller
       return $recipe_return;
     }
 
-    public function courses(){
+    public function courses($user_id){
       $courses = array();
       $overview = Course::get();
       foreach($overview as $data){
@@ -95,6 +96,9 @@ class ExportController extends Controller
         foreach($lessons as $lesson){
           $lesson->hd_img = 'https://okomemode.com/img/'.$lesson->hd_img;
         }
+        $completed_lessons = CompletedLesson::where('user_id', $user_id)
+        ->where('course_id', $data->id)
+        ->get();
         $course = [
           "course_id" => $data->id,
           "name" => $data->name,
@@ -103,18 +107,32 @@ class ExportController extends Controller
           "image" => 'https://okomemode.com/img/'.$data->image,
           "desc" => $data->desc,
           "lessons" => $lessons,
+          "lesson_num" => count($lessons),
+          "completed_lesson_num" => count($completed_lessons),
         ];
         array_push($courses, $course);
       }
       return $courses;
     }
 
-    public function course(Course $course){
+    public function course($course_id, $user_id){
+      $course = Course::where('id', $course_id)->first();
       $lessons = Lesson::where('course_id', $course->id)
       ->select('lesson_id', 'name', 'hd_img', 'desc', 'recipe_id')
       ->get();
+      
       foreach($lessons as $lesson){
+        // dd($lesson);
         $lesson->hd_img = 'https://okomemode.com/img/'.$lesson->hd_img;
+        $completed_lesson = CompletedLesson::where('course_id', $course_id)
+        ->where('user_id', $user_id)->where('lesson_id',$lesson->lesson_id)
+        ->first();
+        if($completed_lesson==NULL){
+          $completed = 0;
+        } else {
+          $completed = 1;
+        }
+        $lesson->completed = $completed;
       }
       $course_item = [
         "course_id" => $course->id,
@@ -126,6 +144,60 @@ class ExportController extends Controller
         "lessons" => $lessons,
       ];
       return $course_item;
-      dd($course_item);
+    }
+
+    public function stock($user){
+      // dd($user);
+        $records = Stocked_Recipe::where('stocked_recipes.user_id',$user)
+        ->join('recipes', 'recipes.id', '=', 'stocked_recipes.recipe_id')
+        ->get();
+
+        $stocked_recipes = Stocked_Recipe::where('stocked_recipes.user_id',$user)->get();
+        $recipe_ids = [];
+        foreach($stocked_recipes as $stocked_recipe){
+            array_push($recipe_ids, $stocked_recipe->recipe_id);
+        }
+        $ingredients = Ingredient::whereIn('recipe_id', $recipe_ids)->get(['ingredient','amount','unit'])->groupBy('ingredient');
+        $ingredient_items = [];
+        foreach($ingredients as $ingredient){
+            $ingredient_item = [];
+            $item_amount_box = [];
+            foreach($ingredient as $item){
+            array_push($item_amount_box, $item->amount);
+            }
+            $item_amount = array_sum($item_amount_box);
+            array_push($ingredient_item, $ingredient[0]->ingredient, $item_amount, $ingredient[0]->unit);
+            array_push($ingredient_items, $ingredient_item);
+        }
+        return [
+          'recipes' => $records,
+          'ingredients' => $ingredient_items,
+        ];
+    }
+
+    public function add_stock(Request $request){
+      $record = Stocked_Recipe::where('recipe_id',$request->recipe_id)->where('user_id',$request->user_id)->first();
+      if($record==NULL){
+          $stocked_recipe = new Stocked_Recipe();
+          $stocked_recipe->user_id=$request->user_id;
+          $stocked_recipe->recipe_id=$request->recipe_id;
+          $stocked_recipe->save();
+      }
+    }
+
+    public function remove_stock(Request $request){
+      $remove = Stocked_Recipe::where('recipe_id',$request->recipe_id)
+      ->where('user_id',$request->user_id)->delete();
+    }
+
+    public function destroy_stock(Request $request){
+      $destroy = Stocked_Recipe::where('user_id',$request->user_id)->delete();
+    }
+
+    public function completed_course($user_id, $recipe_id){
+      $courses = Course::orderBy('id', 'asc')->get();
+      foreach($courses as $course){
+
+      }
     }
 }
