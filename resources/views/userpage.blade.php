@@ -4,7 +4,11 @@
 <div class="recipe_inner">
 
     <div class="account_info">
-        <img src="{{ asset('storage/img/'.$user->icon) }}">
+        @if (isset($user->icon))
+            <img src="{{ asset('storage/img/'.$user->icon) }}">
+        @else
+            <img src="{{ asset('/img/default.jpg') }}">
+        @endif
         <h4>{{ $user->name }}</h4>
         <p>Lv.{{ floor($user->level) }}</p>
         <progress max="1" value="{{ $user->level - floor($user->level) }}">{{ $user->level - floor($user->level) }}%</progress>

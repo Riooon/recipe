@@ -9,7 +9,11 @@
     <div class="overview_inner">
         @auth
         <div class="user_info">
-            <img src="{{ asset('storage/img/'.Auth::user()->icon) }}">
+            @if (isset(Auth::user()->icon))
+                <img src="{{ asset('storage/img/'.Auth::user()->icon) }}">
+            @else
+                <img src="{{ asset('/img/default.jpg') }}">
+            @endif
             <div class="texts">
                 <h4>{{ Auth::user()->name }}</h4>
                 <p>Lv.{{ floor(Auth::user()->level) }}</p>

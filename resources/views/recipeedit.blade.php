@@ -26,7 +26,25 @@
                     <div class="form_each">
                         <input type="text" name="ingredient_{{$i}}" class="ingredients" value='{{$ingredients[$i]->ingredient}}'>
                         <input type="number" name="amount_{{$i}}" value='{{$ingredients[$i]->amount}}'  class="amount">
-                        {{Form::select('unit_{$i}', ['個', 'g', 'ml'], $ingredients[$i]->unit,['class'=>'units'])}}
+                        @if ($ingredients[$i]->unit == 0)
+                            <select name="unit_{{$i}}" class="units">
+                                <option value="0" selected>個</option>
+                                <option value="1">g</option>
+                                <option value="2">ml</option>
+                            </select>
+                        @elseif ($ingredients[$i]->unit == 1)
+                            <select name="unit_{{$i}}" class="units">
+                                <option value="0">個</option>
+                                <option value="1" selected>g</option>
+                                <option value="2">ml</option>
+                            </select>
+                        @else
+                            <select name="unit_{{$i}}" class="units">
+                                <option value="0">個</option>
+                                <option value="1">g</option>
+                                <option value="2" selected>ml</option>
+                            </select>
+                        @endif
                     </div>
                 @endfor
             </div>

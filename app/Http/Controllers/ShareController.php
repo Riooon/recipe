@@ -242,8 +242,7 @@ class ShareController extends Controller
         $recipe_id = $recipes->id;
 
         $processes = Process::where('recipe_id',$recipe_id)->get();
-
-        for ($i = 0; $i < 5; $i++){
+        for ($i = 0; $i < count($processes); $i++){
             $processes[$i]->text = $request->{"text_".$i};
             $processes[$i]->sort = $request->{"sort_".$i};
             if(!$request->file("image_".$i)==NULL){
@@ -257,11 +256,14 @@ class ShareController extends Controller
             $processes[$i]->save();
         }
 
-        $ingredients = Ingredient::where('recipe_id',$recipe_id)->first();
-        for ($i = 0; $i < 7; $i++){
-            $ingredients->{"ingredient_".$i} = $request->{"ingredient_".$i};
+        $ingredients = Ingredient::where('recipe_id',$recipe_id)->get();
+        for ($i = 0; $i < count($ingredients); $i++){
+            // dd($ingredients);
+            $ingredients[$i]->ingredient = $request->{"ingredient_".$i};
+            $ingredients[$i]->amount = $request->{"amount_".$i};
+            $ingredients[$i]->unit = $request->{"unit_".$i};
+            $ingredients[$i]->save();
         }
-        $ingredients->save();
 
         return redirect('recipe/'.$request->recipe_id);        
     }
